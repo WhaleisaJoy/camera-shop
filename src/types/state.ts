@@ -1,8 +1,10 @@
 import { store } from '../store';
-import { Camera } from './camera';
+import type { Camera } from './camera';
+import type { PromoType } from './promo';
 
 export type DataReducer = {
   cameras: Camera[],
+  promo: PromoType,
   isDataLoaded: boolean,
   isPromoLoaded: boolean,
 };

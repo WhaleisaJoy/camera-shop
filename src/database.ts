@@ -122,3 +122,12 @@ export const SocialSettings = [
     IconHeight: 20,
   },
 ] as const;
+
+export enum DefaultPromo {
+  id = 0,
+  name = '',
+  previewImg = '',
+  previewImg2x = '',
+  previewImgWebp = '',
+  previewImgWebp2x = '',
+}
