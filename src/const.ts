@@ -1,3 +1,7 @@
+export const PRODUCT_PAGINATION_STEP = 9;
+
+export const DEFAULT_PAGE = 1;
+
 export enum AppRoute {
   Root = '/',
   Catalog = '/catalog/page-',
@@ -27,6 +31,6 @@ export enum NameSpace {
   Pagination = 'PAGINATION',
 }
 
-export const PRODUCT_PAGINATION_STEP = 9;
-
-export const DEFAULT_PAGE = 1;
+export enum KeyCode {
+  Escape = 'Escape',
+}
