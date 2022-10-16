@@ -1,6 +1,6 @@
 export enum AppRoute {
   Root = '/',
-  Catalog = '/',
+  Catalog = '/catalog/page-',
   Warranty = '#',
   Delivery = '#',
   About = '#',
@@ -24,4 +24,9 @@ export enum APIRoute {
 
 export enum NameSpace {
   Data = 'DATA',
+  Pagination = 'PAGINATION',
 }
+
+export const PRODUCT_PAGINATION_STEP = 9;
+
+export const DEFAULT_PAGE = 1;

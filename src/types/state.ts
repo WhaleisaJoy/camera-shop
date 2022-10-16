@@ -9,6 +9,10 @@ export type DataReducer = {
   isPromoLoaded: boolean,
 };
 
+export type PaginationReducer = {
+  currentPage: number,
+};
+
 export type State = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;

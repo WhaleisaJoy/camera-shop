@@ -6,8 +6,11 @@ import PageHeader from '../../components/page-header/page-header';
 import Pagination from '../../components/pagination/pagination';
 import ProductsList from '../../components/products-list/products-list';
 import Sort from '../../components/sort/sort';
+import { getTotalPagesCount } from '../../utils';
 
 function Catalog(): JSX.Element {
+  const totalPages = getTotalPagesCount();
+
   return (
     <div className="wrapper">
       <PageHeader />
@@ -29,7 +32,7 @@ function Catalog(): JSX.Element {
                 <div className="catalog__content">
                   <Sort />
                   <ProductsList />
-                  <Pagination />
+                  <Pagination totalPages={totalPages} />
                 </div>
               </div>
             </div>
