@@ -131,3 +131,4 @@ export enum DefaultPromo {
   previewImgWebp = '',
   previewImgWebp2x = '',
 }
+
