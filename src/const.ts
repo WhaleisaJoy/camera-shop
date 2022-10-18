@@ -28,7 +28,6 @@ export enum APIRoute {
 
 export enum NameSpace {
   Data = 'DATA',
-  Pagination = 'PAGINATION',
 }
 
 export enum KeyCode {

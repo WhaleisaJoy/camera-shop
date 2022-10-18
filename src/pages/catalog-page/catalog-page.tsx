@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import Banner from '../../components/banner/banner';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import Filter from '../../components/filter/filter';
@@ -6,10 +7,12 @@ import PageHeader from '../../components/page-header/page-header';
 import Pagination from '../../components/pagination/pagination';
 import ProductsList from '../../components/products-list/products-list';
 import Sort from '../../components/sort/sort';
-import { getTotalPagesCount } from '../../utils';
+import { usePagination } from '../../hooks/usePagination';
+import { getCameras } from '../../store/data-reducer/selectors';
 
 function Catalog(): JSX.Element {
-  const totalPages = getTotalPagesCount();
+  const cameras = useSelector(getCameras);
+  const totalPages = usePagination(cameras.length);
 
   return (
     <div className="wrapper">
@@ -31,7 +34,7 @@ function Catalog(): JSX.Element {
 
                 <div className="catalog__content">
                   <Sort />
-                  <ProductsList />
+                  <ProductsList cameras={cameras} />
                   <Pagination totalPages={totalPages} />
                 </div>
               </div>
