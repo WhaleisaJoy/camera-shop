@@ -1,20 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
-import { DefaultPromo } from '../../database';
+import { DefaultCamera, DefaultPromo } from '../../database';
 import { DataReducer } from '../../types/state';
-import { fetchCamerasAction, fetchPromoAction } from '../api-actions';
+import { fetchCamerasAction, fetchCurrentCameraAction, fetchPromoAction } from '../api-actions';
 
 const initialState: DataReducer = {
   cameras: [],
+  currentCamera: DefaultCamera,
   promo: DefaultPromo,
   isDataLoaded: false,
+  isCurrentCameraLoaded: false,
   isPromoLoaded: false,
 };
 
 export const appData = createSlice({
   name: NameSpace.Data,
   initialState,
-  reducers: {},
+  reducers: {
+    dropCurrentCamera: (state) => {
+      state.currentCamera = DefaultCamera;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCamerasAction.pending, (state) => {
@@ -24,6 +30,15 @@ export const appData = createSlice({
         state.cameras = action.payload;
         state.isDataLoaded = false;
       })
+
+      .addCase(fetchCurrentCameraAction.pending, (state) => {
+        state.isCurrentCameraLoaded = true;
+      })
+      .addCase(fetchCurrentCameraAction.fulfilled, (state, action) => {
+        state.currentCamera = action.payload;
+        state.isCurrentCameraLoaded = false;
+      })
+
       .addCase(fetchPromoAction.pending, (state) => {
         state.isPromoLoaded = true;
       })
@@ -34,4 +49,5 @@ export const appData = createSlice({
   }
 });
 
+export const { dropCurrentCamera } = appData.actions;
 export default appData.reducer;

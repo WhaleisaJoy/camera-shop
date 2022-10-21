@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import { Camera } from '../../types/camera';
 import ModalAddToBasket from '../modal-add-to-basket/modal-add-to-basket';
 import Rating from '../rating/rating';
@@ -10,6 +11,7 @@ type ProductsItemProps = {
 
 function ProductsItem({ camera }: ProductsItemProps): JSX.Element {
   const {
+    id,
     name,
     price,
     previewImg,
@@ -63,7 +65,7 @@ function ProductsItem({ camera }: ProductsItemProps): JSX.Element {
           </button>
           <Link
             className="btn btn--transparent"
-            to="#"
+            to={`${AppRoute.Catalog}${AppRoute.Product}${id}`}
           >
             Подробнее
           </Link>

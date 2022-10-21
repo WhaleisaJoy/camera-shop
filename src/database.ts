@@ -123,6 +123,23 @@ export const SocialSettings = [
   },
 ] as const;
 
+export enum DefaultCamera {
+  id = 0,
+  name = '',
+  vendorCode = '',
+  type = '',
+  category = '',
+  description = '',
+  level = '',
+  rating = 0,
+  price = 0,
+  previewImg = '',
+  previewImg2x = '',
+  previewImgWebp = '',
+  previewImgWebp2x = '',
+  reviewCount = 0,
+}
+
 export enum DefaultPromo {
   id = 0,
   name = '',

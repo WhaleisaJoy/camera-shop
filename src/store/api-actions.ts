@@ -17,6 +17,18 @@ export const fetchCamerasAction = createAsyncThunk<Camera[], undefined, {
   },
 );
 
+export const fetchCurrentCameraAction = createAsyncThunk<Camera, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchCurrentCamera',
+  async (id, { dispatch, extra: api }) => {
+    const { data } = await api.get<Camera>(`${APIRoute.Cameras}/${id}`);
+    return data;
+  },
+);
+
 export const fetchPromoAction = createAsyncThunk<PromoType, undefined, {
   dispatch: AppDispatch;
   state: State;

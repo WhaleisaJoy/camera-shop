@@ -17,7 +17,7 @@ function Pagination({ totalPages }: PaginationProps): JSX.Element {
             <li className="pagination__item">
               <Link
                 className="pagination__link pagination__link--text"
-                to={`${AppRoute.Catalog}${+id - 1}`}
+                to={`${AppRoute.CatalogPage}${+id - 1}`}
               >
                 Назад
               </Link>
@@ -34,7 +34,7 @@ function Pagination({ totalPages }: PaginationProps): JSX.Element {
               <li key={`page-${count}`} className="pagination__item">
                 <Link
                   className={`pagination__link ${classActive}`}
-                  to={`${AppRoute.Catalog}${count}`}
+                  to={`${AppRoute.CatalogPage}${count}`}
                 >
                   {count}
                 </Link>
@@ -48,7 +48,7 @@ function Pagination({ totalPages }: PaginationProps): JSX.Element {
             <li className="pagination__item">
               <Link
                 className="pagination__link pagination__link--text"
-                to={`${AppRoute.Catalog}${+id + 1}`}
+                to={`${AppRoute.CatalogPage}${+id + 1}`}
               >
                 Далее
               </Link>

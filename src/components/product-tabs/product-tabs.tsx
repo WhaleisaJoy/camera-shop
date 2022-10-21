@@ -40,31 +40,17 @@ function ProductTabs({ camera }: ProductTabsProps): JSX.Element {
       <div className="tabs__content">
         <div className="tabs__element">
           <ul className="product__tabs-list">
-
             {
-              ProductFeautureSettings.map(({ Name, Value }) => {
-                return (
-                  <li className="item-list">
-                    <span className="item-list__title">{`${Name}: `}</span>
-                    <p className="item-list__text">{Value}</p>
-                  </li>
-                );
-              })
+              ProductFeautureSettings.map(({ Name, Value }) => (
+                <li
+                  key={Name}
+                  className="item-list"
+                >
+                  <span className="item-list__title">{`${Name}: `}</span>
+                  <p className="item-list__text">{Value}</p>
+                </li>
+              ))
             }
-
-            {/* <li className="item-list">
-              <span className="item-list__title">Артикул:</span>
-              <p className="item-list__text"> DA4IU67AD5</p>
-            </li>
-            <li className="item-list"><span className="item-list__title">Категория:</span>
-              <p className="item-list__text">Видеокамера</p>
-            </li>
-            <li className="item-list"><span className="item-list__title">Тип камеры:</span>
-              <p className="item-list__text">Коллекционная</p>
-            </li>
-            <li className="item-list"><span className="item-list__title">Уровень:</span>
-              <p className="item-list__text">Любительский</p>
-            </li> */}
           </ul>
         </div>
         <div className="tabs__element is-active">

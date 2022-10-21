@@ -4,7 +4,9 @@ export const DEFAULT_PAGE = 1;
 
 export enum AppRoute {
   Root = '/',
-  Catalog = '/catalog/page-',
+  Catalog = '/catalog',
+  CatalogPage = '/catalog/page-',
+  Product = '/product-',
   Warranty = '#',
   Delivery = '#',
   About = '#',

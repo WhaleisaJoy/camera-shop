@@ -4,8 +4,10 @@ import type { PromoType } from './promo';
 
 export type DataReducer = {
   cameras: Camera[],
+  currentCamera: Camera,
   promo: PromoType,
   isDataLoaded: boolean,
+  isCurrentCameraLoaded: boolean,
   isPromoLoaded: boolean,
 };
 
