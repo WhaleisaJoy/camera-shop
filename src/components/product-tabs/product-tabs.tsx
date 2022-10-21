@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { Camera } from '../../types/camera';
 
 type ProductTabsProps = {
@@ -11,6 +12,8 @@ function ProductTabs({ camera }: ProductTabsProps): JSX.Element {
     type,
     level,
     description } = camera;
+
+  const TABS_NAME = ['Характеристики', 'Описание'];
 
   const ProductFeautureSettings = [
     {
@@ -31,14 +34,27 @@ function ProductTabs({ camera }: ProductTabsProps): JSX.Element {
     },
   ];
 
+  const [activeTab, setActiveTab] = useState<string>(TABS_NAME[0]);
+
   return (
     <div className="tabs product__tabs">
       <div className="tabs__controls product__tabs-controls">
-        <button className="tabs__control" type="button">Характеристики</button>
-        <button className="tabs__control is-active" type="button">Описание</button>
+        {
+          TABS_NAME.map((tab) => (
+            <button
+              key={tab}
+              className={`tabs__control ${tab === activeTab ? 'is-active' : ''}`}
+              type="button"
+              onClick={() => setActiveTab(tab)}
+            >
+              {tab}
+            </button>
+          ))
+        }
       </div>
+
       <div className="tabs__content">
-        <div className="tabs__element">
+        <div className={`tabs__element ${activeTab === TABS_NAME[0] ? 'is-active' : ''}`}>
           <ul className="product__tabs-list">
             {
               ProductFeautureSettings.map(({ Name, Value }) => (
@@ -53,7 +69,7 @@ function ProductTabs({ camera }: ProductTabsProps): JSX.Element {
             }
           </ul>
         </div>
-        <div className="tabs__element is-active">
+        <div className={`tabs__element ${activeTab === TABS_NAME[1] ? 'is-active' : ''}`}>
           <div className="product__tabs-text">
             <p>{description}</p>
           </div>
