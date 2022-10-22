@@ -2,15 +2,17 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { DefaultCamera, DefaultPromo } from '../../database';
 import { DataReducer } from '../../types/state';
-import { fetchCamerasAction, fetchCurrentCameraAction, fetchPromoAction } from '../api-actions';
+import { fetchCamerasAction, fetchCurrentCameraAction, fetchPromoAction, fetchSimilarCamerasAction } from '../api-actions';
 
 const initialState: DataReducer = {
   cameras: [],
   currentCamera: DefaultCamera,
   promo: DefaultPromo,
+  similar: [],
   isDataLoaded: false,
   isCurrentCameraLoaded: false,
   isPromoLoaded: false,
+  isSimilarLoaded: false,
 };
 
 export const appData = createSlice({
@@ -45,6 +47,14 @@ export const appData = createSlice({
       .addCase(fetchPromoAction.fulfilled, (state, action) => {
         state.promo = action.payload;
         state.isPromoLoaded = false;
+      })
+
+      .addCase(fetchSimilarCamerasAction.pending, (state) => {
+        state.isSimilarLoaded = true;
+      })
+      .addCase(fetchSimilarCamerasAction.fulfilled, (state, action) => {
+        state.similar = action.payload;
+        state.isSimilarLoaded = false;
       });
   }
 });
