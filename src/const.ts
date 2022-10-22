@@ -26,6 +26,7 @@ export enum SocialRoute {
 export enum APIRoute {
   Cameras = '/cameras',
   Promo = '/promo',
+  Similar = '/similar',
 }
 
 export enum NameSpace {

@@ -6,9 +6,11 @@ export type DataReducer = {
   cameras: Camera[],
   currentCamera: Camera,
   promo: PromoType,
+  similar: Camera[],
   isDataLoaded: boolean,
   isCurrentCameraLoaded: boolean,
   isPromoLoaded: boolean,
+  isSimilarLoaded: boolean,
 };
 
 export type PaginationReducer = {

@@ -7,9 +7,10 @@ import Rating from '../rating/rating';
 
 type ProductsItemProps = {
   camera: Camera;
+  isActive?: boolean;
 };
 
-function ProductsItem({ camera }: ProductsItemProps): JSX.Element {
+function ProductsItem({ camera, isActive }: ProductsItemProps): JSX.Element {
   const {
     id,
     name,
@@ -27,7 +28,7 @@ function ProductsItem({ camera }: ProductsItemProps): JSX.Element {
 
   return (
     <>
-      <div className="product-card">
+      <div className={`product-card ${isActive ? 'is-active' : ''}`}>
         <div className="product-card__img">
           <picture>
             <source
