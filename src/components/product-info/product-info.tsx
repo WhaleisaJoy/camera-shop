@@ -1,5 +1,6 @@
 import type { Camera } from '../../types/camera';
 import ProductTabs from '../product-tabs/product-tabs';
+import Rating from '../rating/rating';
 
 type ProductInfoProps = {
   camera: Camera;
@@ -9,6 +10,8 @@ function ProductInfo({ camera }: ProductInfoProps): JSX.Element {
   const {
     name,
     price,
+    rating,
+    reviewCount,
     previewImg,
     previewImg2x,
     previewImgWebp,
@@ -34,25 +37,11 @@ function ProductInfo({ camera }: ProductInfoProps): JSX.Element {
         </div>
         <div className="product__content">
           <h1 className="title title--h3">{name}</h1>
-          <div className="rate product__rate">
-            <svg width="17" height="16" aria-hidden="true">
-              <use xlinkHref="#icon-full-star"></use>
-            </svg>
-            <svg width="17" height="16" aria-hidden="true">
-              <use xlinkHref="#icon-full-star"></use>
-            </svg>
-            <svg width="17" height="16" aria-hidden="true">
-              <use xlinkHref="#icon-full-star"></use>
-            </svg>
-            <svg width="17" height="16" aria-hidden="true">
-              <use xlinkHref="#icon-full-star"></use>
-            </svg>
-            <svg width="17" height="16" aria-hidden="true">
-              <use xlinkHref="#icon-star"></use>
-            </svg>
-            <p className="visually-hidden">Рейтинг: 4</p>
-            <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>12</p>
-          </div>
+          <Rating
+            rating={rating}
+            reviewCount={reviewCount}
+            className={'product__rate'}
+          />
           <p className="product__price">
             <span className="visually-hidden">
               Цена:

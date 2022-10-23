@@ -27,6 +27,7 @@ export enum APIRoute {
   Cameras = '/cameras',
   Promo = '/promo',
   Similar = '/similar',
+  Reviews = '/reviews',
 }
 
 export enum NameSpace {

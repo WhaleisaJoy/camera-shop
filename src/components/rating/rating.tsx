@@ -2,12 +2,14 @@ import { RatingSettings } from '../../database';
 
 type RatingProps = {
   rating: number;
-  reviewCount: number;
+  reviewCount?: number;
+  className?: string;
+  isRateCount?: boolean;
 };
 
-function Rating({ rating, reviewCount }: RatingProps): JSX.Element {
+function Rating({ rating, reviewCount, className = 'product-card__rate', isRateCount = true }: RatingProps): JSX.Element {
   return (
-    <div className="rate product-card__rate">
+    <div className={`rate ${className}`}>
 
       {
         RatingSettings.map(({ Value, Name }) => {
@@ -29,12 +31,17 @@ function Rating({ rating, reviewCount }: RatingProps): JSX.Element {
       <p className="visually-hidden">
         {`Рейтинг: ${rating}`}
       </p>
-      <p className="rate__count">
-        <span className="visually-hidden">
-          Всего оценок:
-        </span>
-        {reviewCount}
-      </p>
+
+      {
+        isRateCount && (
+          <p className="rate__count">
+            <span className="visually-hidden">
+              Всего оценок:
+            </span>
+            {reviewCount}
+          </p>
+        )
+      }
     </div>
   );
 }
