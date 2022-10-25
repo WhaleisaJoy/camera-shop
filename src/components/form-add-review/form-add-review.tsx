@@ -1,7 +1,9 @@
 import { useForm } from 'react-hook-form';
-import { SERVER_URL } from '../../const';
+import { useSelector } from 'react-redux';
+import { LoadingStatus, SERVER_URL } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
+import { getReviewSendingStatus } from '../../store/data-reducer/selectors';
 import type { PostReview } from '../../types/review';
 import CustomInput from '../custom-input/custom-input';
 import CustomRate from '../custom-rate/custom-rate';
@@ -14,14 +16,16 @@ type FormAddReviewProps = {
 function FormAddReview({ id }: FormAddReviewProps): JSX.Element {
   const dispatch = useAppDispatch();
 
+  const reviewSendingStatus = useSelector(getReviewSendingStatus);
+
   const { register, reset, handleSubmit, formState: { errors } } = useForm<PostReview>();
+
+  const checkIfValid = (name: keyof PostReview) => errors[name] ? 'is-invalid' : '';
 
   const handleFormSubmit = (data: PostReview) => {
     dispatch(postReviewAction({ ...data, rating: Number(data.rating), cameraId: Number(id) }));
     reset();
   };
-
-  const checkIfValid = (name: keyof PostReview) => errors[name] ? 'is-invalid' : '';
 
   return (
     <form
@@ -78,7 +82,11 @@ function FormAddReview({ id }: FormAddReviewProps): JSX.Element {
         />
       </div>
 
-      <button className="btn btn--purple form-review__btn" type="submit">
+      <button
+        className="btn btn--purple form-review__btn"
+        type="submit"
+        disabled={reviewSendingStatus === LoadingStatus.Pending}
+      >
         Отправить отзыв
       </button>
     </form>

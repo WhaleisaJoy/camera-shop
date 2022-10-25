@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { LoadingStatus } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { fetchReviewsAction } from '../../store/api-actions';
+import { setReviewSendingStatus } from '../../store/data-reducer/data-reducer';
 import { getReviewSendingStatus, getSortedReviews } from '../../store/data-reducer/selectors';
 import ModalAddReviewSuccess from '../modal-add-review-success/modal-add-review-success';
 import ModalAddReview from '../modal-add-review/modal-add-review';
@@ -28,7 +29,10 @@ function Reviews({ id }: ReviewsProps): JSX.Element {
   const reviewSendingStatus = useSelector(getReviewSendingStatus);
   const isShowMore = shownReviews < reviews.length;
 
-  const handleToggleModal = () => setModalOpen((prevState) => !prevState);
+  const handleToggleModal = () => {
+    setModalOpen((prevState) => !prevState);
+    dispatch(setReviewSendingStatus(LoadingStatus.Idle));
+  };
   const handleShowMoreClick = () => setShownReviews((prevState) => prevState + REVIEWS_STEP);
 
   return (
