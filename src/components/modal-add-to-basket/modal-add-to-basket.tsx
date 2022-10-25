@@ -1,4 +1,5 @@
 import type { Camera } from '../../types/camera';
+import ModalClose from '../modal-close/modal-close';
 import Modal from '../modal/modal';
 
 type ModalAddToBasketProps = {
@@ -69,16 +70,8 @@ function ModalAddToBasket({ camera, handleCloseClick }: ModalAddToBasketProps): 
                 Добавить в корзину
               </button>
             </div>
-            <button
-              className="cross-btn"
-              type="button"
-              aria-label="Закрыть попап"
-              onClick={handleCloseClick}
-            >
-              <svg width="10" height="10" aria-hidden="true">
-                <use xlinkHref="#icon-close"></use>
-              </svg>
-            </button>
+
+            <ModalClose handleCloseClick={handleCloseClick} />
           </div>
         </div>
       </div>

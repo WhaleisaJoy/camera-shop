@@ -1,3 +1,4 @@
+import { LoadingStatus } from '../const';
 import { store } from '../store';
 import type { Camera } from './camera';
 import type { PromoType } from './promo';
@@ -14,6 +15,7 @@ export type DataReducer = {
   isPromoLoaded: boolean,
   isSimilarLoaded: boolean,
   isReviewsLoaded: boolean,
+  reviewSendingStatus: LoadingStatus,
 };
 
 export type PaginationReducer = {

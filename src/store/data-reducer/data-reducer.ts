@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
+import { LoadingStatus, NameSpace } from '../../const';
 import { DefaultCamera, DefaultPromo } from '../../database';
 import { DataReducer } from '../../types/state';
-import { fetchCamerasAction, fetchCurrentCameraAction, fetchPromoAction, fetchReviewsAction, fetchSimilarCamerasAction } from '../api-actions';
+import { fetchCamerasAction, fetchCurrentCameraAction, fetchPromoAction, fetchReviewsAction, fetchSimilarCamerasAction, postReviewAction } from '../api-actions';
 
 const initialState: DataReducer = {
   cameras: [],
@@ -15,6 +15,7 @@ const initialState: DataReducer = {
   isPromoLoaded: false,
   isSimilarLoaded: false,
   isReviewsLoaded: false,
+  reviewSendingStatus: LoadingStatus.Idle,
 };
 
 export const appData = createSlice({
@@ -23,6 +24,9 @@ export const appData = createSlice({
   reducers: {
     dropCurrentCamera: (state) => {
       state.currentCamera = DefaultCamera;
+    },
+    setReviewSendingStatus: (state, action) => {
+      state.reviewSendingStatus = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -65,9 +69,19 @@ export const appData = createSlice({
       .addCase(fetchReviewsAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
         state.isReviewsLoaded = false;
+      })
+
+      .addCase(postReviewAction.pending, (state) => {
+        state.reviewSendingStatus = LoadingStatus.Pending;
+      })
+      .addCase(postReviewAction.fulfilled, (state) => {
+        state.reviewSendingStatus = LoadingStatus.Fulfilled;
+      })
+      .addCase(postReviewAction.rejected, (state) => {
+        state.reviewSendingStatus = LoadingStatus.Rejected;
       });
   }
 });
 
-export const { dropCurrentCamera } = appData.actions;
+export const { dropCurrentCamera, setReviewSendingStatus } = appData.actions;
 export default appData.reducer;

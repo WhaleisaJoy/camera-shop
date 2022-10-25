@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { createSelector } from 'reselect';
-import { NameSpace } from '../../const';
+import { LoadingStatus, NameSpace } from '../../const';
 import type { Camera } from '../../types/camera';
 import type { PromoType } from '../../types/promo';
 import type { Review } from '../../types/review';
@@ -17,8 +17,8 @@ export const getLoadedCurrentCameraStatus = (state: State): boolean => state[Nam
 export const getLoadedPromoStatus = (state: State): boolean => state[NameSpace.Data].isPromoLoaded;
 export const getLoadedSimilarStatus = (state: State): boolean => state[NameSpace.Data].isSimilarLoaded;
 export const getLoadedReviewsStatus = (state: State): boolean => state[NameSpace.Data].isReviewsLoaded;
+export const getReviewSendingStatus = (state: State): LoadingStatus => state[NameSpace.Data].reviewSendingStatus;
 
 export const getSortedReviews = createSelector(
   getReviews,
-  (reviews) => [...reviews].sort((a, b) => dayjs(b.createAt).diff(dayjs(a.createAt)))
-);
+  (reviews) => [...reviews].sort((a, b) => dayjs(b.createAt).diff(dayjs(a.createAt))));

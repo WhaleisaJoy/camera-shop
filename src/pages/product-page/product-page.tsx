@@ -8,7 +8,6 @@ import ProductSimilar from '../../components/product-similar/product-similar';
 import Reviews from '../../components/reviews/reviews';
 import { useAppDispatch } from '../../hooks';
 import { fetchCurrentCameraAction, fetchSimilarCamerasAction } from '../../store/api-actions';
-import { dropCurrentCamera } from '../../store/data-reducer/data-reducer';
 import { getCurrentCamera, getLoadedCurrentCameraStatus, getLoadedSimilarStatus, getSimilar } from '../../store/data-reducer/selectors';
 import LoadingPage from '../loading-page/loading-page';
 
@@ -19,13 +18,6 @@ function ProductPage(): JSX.Element {
 
   useEffect(() => {
     id && dispatch(fetchCurrentCameraAction(id));
-
-    return () => {
-      dispatch(dropCurrentCamera());
-    };
-  }, [dispatch, id]);
-
-  useEffect(() => {
     id && dispatch(fetchSimilarCamerasAction(id));
   }, [id, dispatch]);
 

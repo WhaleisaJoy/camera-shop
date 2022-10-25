@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { LoadingStatus } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { fetchReviewsAction } from '../../store/api-actions';
-import { getSortedReviews } from '../../store/data-reducer/selectors';
+import { getReviewSendingStatus, getSortedReviews } from '../../store/data-reducer/selectors';
+import ModalAddReviewSuccess from '../modal-add-review-success/modal-add-review-success';
+import ModalAddReview from '../modal-add-review/modal-add-review';
 import ReviewsItem from '../reviews-item/reviews-item';
 
 type ReviewsProps = {
@@ -18,10 +21,14 @@ function Reviews({ id }: ReviewsProps): JSX.Element {
     id && dispatch(fetchReviewsAction(id));
   }, [id, dispatch]);
 
+  const [isModalOpen, setModalOpen] = useState(false);
   const [shownReviews, setShownReviews] = useState(REVIEWS_STEP);
-  const reviews = useSelector(getSortedReviews);
 
+  const reviews = useSelector(getSortedReviews);
+  const reviewSendingStatus = useSelector(getReviewSendingStatus);
   const isShowMore = shownReviews < reviews.length;
+
+  const handleToggleModal = () => setModalOpen((prevState) => !prevState);
   const handleShowMoreClick = () => setShownReviews((prevState) => prevState + REVIEWS_STEP);
 
   return (
@@ -29,7 +36,13 @@ function Reviews({ id }: ReviewsProps): JSX.Element {
       <div className="container">
         <div className="page-content__headed">
           <h2 className="title title--h3">Отзывы</h2>
-          <button className="btn" type="button">Оставить свой отзыв</button>
+          <button
+            className="btn"
+            type="button"
+            onClick={handleToggleModal}
+          >
+            Оставить свой отзыв
+          </button>
         </div>
 
         {
@@ -55,6 +68,14 @@ function Reviews({ id }: ReviewsProps): JSX.Element {
                 Показать больше отзывов
               </button>
             </div>
+          )
+        }
+
+        {
+          isModalOpen && (
+            reviewSendingStatus === LoadingStatus.Fulfilled
+              ? <ModalAddReviewSuccess handleCloseClick={handleToggleModal} />
+              : <ModalAddReview id={id} handleCloseClick={handleToggleModal} />
           )
         }
       </div>
