@@ -24,7 +24,7 @@ function ProductsItem({ camera, isActive }: ProductsItemProps): JSX.Element {
 
   const [isModalOpen, setModalOpen] = useState(false);
 
-  const handleMoreClick = () => setModalOpen((prevState) => !prevState);
+  const handleToggleModal = () => setModalOpen((prevState) => !prevState);
 
   return (
     <>
@@ -60,7 +60,7 @@ function ProductsItem({ camera, isActive }: ProductsItemProps): JSX.Element {
           <button
             className="btn btn--purple product-card__btn"
             type="button"
-            onClick={handleMoreClick}
+            onClick={handleToggleModal}
           >
             Купить
           </button>
@@ -74,7 +74,7 @@ function ProductsItem({ camera, isActive }: ProductsItemProps): JSX.Element {
       </div>
 
       {
-        isModalOpen && <ModalAddToBasket camera={camera} handleCloseClick={handleMoreClick} />
+        isModalOpen && <ModalAddToBasket camera={camera} handleCloseClick={handleToggleModal} />
       }
     </>
   );

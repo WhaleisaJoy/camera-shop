@@ -123,6 +123,29 @@ export const SocialSettings = [
   },
 ] as const;
 
+export const ReviewRateSettings = [
+  {
+    Name: 'Отлично',
+    Value: 5,
+  },
+  {
+    Name: 'Хорошо',
+    Value: 4,
+  },
+  {
+    Name: 'Нормально',
+    Value: 3,
+  },
+  {
+    Name: 'Плохо',
+    Value: 2,
+  },
+  {
+    Name: 'Ужасно',
+    Value: 1,
+  },
+] as const;
+
 export enum DefaultCamera {
   id = 0,
   name = '',
@@ -148,4 +171,3 @@ export enum DefaultPromo {
   previewImgWebp = '',
   previewImgWebp2x = '',
 }
-
