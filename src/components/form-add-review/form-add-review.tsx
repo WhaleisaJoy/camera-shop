@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import { LoadingStatus, SERVER_URL } from '../../const';
+// import { LoadingStatus, SERVER_URL } from '../../const';
+import { LoadingStatus } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
 import { getReviewSendingStatus } from '../../store/data-reducer/selectors';
@@ -18,20 +19,23 @@ function FormAddReview({ id }: FormAddReviewProps): JSX.Element {
 
   const reviewSendingStatus = useSelector(getReviewSendingStatus);
 
-  const { register, reset, handleSubmit, formState: { errors } } = useForm<PostReview>();
+  const { register, handleSubmit, formState: { errors } } = useForm<PostReview>();
 
   const checkIfValid = (name: keyof PostReview) => errors[name] ? 'is-invalid' : '';
 
-  const handleFormSubmit = (data: PostReview) => {
-    dispatch(postReviewAction({ ...data, rating: Number(data.rating), cameraId: Number(id) }));
-    reset();
+  const onFormSubmit = (data: PostReview) => {
+    dispatch(postReviewAction({
+      ...data,
+      rating: Number(data.rating),
+      cameraId: Number(id),
+    }));
   };
 
   return (
     <form
-      action={SERVER_URL}
+      //action={SERVER_URL}
       method="post"
-      onSubmit={handleSubmit(handleFormSubmit)}
+      onSubmit={handleSubmit(onFormSubmit)}
     >
       <div className="form-review__rate">
         <CustomRate

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { LoadingStatus, NameSpace } from '../../const';
 import { DefaultCamera, DefaultPromo } from '../../database';
 import { DataReducer } from '../../types/state';
@@ -22,10 +22,7 @@ export const appData = createSlice({
   name: NameSpace.Data,
   initialState,
   reducers: {
-    dropCurrentCamera: (state) => {
-      state.currentCamera = DefaultCamera;
-    },
-    setReviewSendingStatus: (state, action) => {
+    setReviewSendingStatus: (state, action: PayloadAction<LoadingStatus>) => {
       state.reviewSendingStatus = action.payload;
     },
   },
@@ -83,5 +80,5 @@ export const appData = createSlice({
   }
 });
 
-export const { dropCurrentCamera, setReviewSendingStatus } = appData.actions;
+export const { setReviewSendingStatus } = appData.actions;
 export default appData.reducer;
