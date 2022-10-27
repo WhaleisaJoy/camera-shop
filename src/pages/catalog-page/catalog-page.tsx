@@ -7,12 +7,18 @@ import Filter from '../../components/filter/filter';
 import Pagination from '../../components/pagination/pagination';
 import ProductsList from '../../components/products-list/products-list';
 import Sort from '../../components/sort/sort';
+import { BreadcrumbsSettings } from '../../database';
 import { useAppDispatch } from '../../hooks';
 import { usePagination } from '../../hooks/usePagination';
 import { fetchCamerasAction, fetchPromoAction } from '../../store/api-actions';
 import { getCameras, getLoadedDataStatus } from '../../store/data-reducer/selectors';
 import LoadingPage from '../loading-page/loading-page';
 import NotFoundPage from '../not-found-page/not-found-page';
+
+const BREADCRUMBS_SETTINGS = [
+  BreadcrumbsSettings.Root,
+  BreadcrumbsSettings.Catalog,
+];
 
 function Catalog(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -47,7 +53,7 @@ function Catalog(): JSX.Element {
       <Banner />
 
       <div className="page-content">
-        <Breadcrumbs />
+        <Breadcrumbs settings={BREADCRUMBS_SETTINGS} />
 
         <section className="catalog">
           <div className="container">

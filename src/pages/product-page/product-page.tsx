@@ -6,10 +6,16 @@ import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import ProductInfo from '../../components/product-info/product-info';
 import ProductSimilar from '../../components/product-similar/product-similar';
 import Reviews from '../../components/reviews/reviews';
+import { BreadcrumbsSettings } from '../../database';
 import { useAppDispatch } from '../../hooks';
 import { fetchCurrentCameraAction, fetchSimilarCamerasAction } from '../../store/api-actions';
 import { getCurrentCamera, getLoadedCurrentCameraStatus, getLoadedSimilarStatus, getSimilar } from '../../store/data-reducer/selectors';
 import LoadingPage from '../loading-page/loading-page';
+
+const BREADCRUMBS_SETTINGS = [
+  BreadcrumbsSettings.Root,
+  BreadcrumbsSettings.Catalog,
+];
 
 function ProductPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -35,7 +41,7 @@ function ProductPage(): JSX.Element {
     <>
       <main>
         <div className="page-content">
-          <Breadcrumbs />
+          <Breadcrumbs settings={[...BREADCRUMBS_SETTINGS, { Name: currentCamera.name }]} />
 
           <div className="page-content__section">
             <ProductInfo camera={currentCamera} />
