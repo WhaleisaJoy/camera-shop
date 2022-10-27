@@ -146,6 +146,17 @@ export const ReviewRateSettings = [
   },
 ] as const;
 
+export const BreadcrumbsSettings = {
+  Root: {
+    Name: 'Главная',
+    Route: AppRoute.Root,
+  },
+  Catalog: {
+    Name: 'Каталог',
+    Route: AppRoute.Catalog,
+  }
+};
+
 export enum DefaultCamera {
   id = 0,
   name = '',
