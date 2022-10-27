@@ -1,0 +1,8 @@
+.page-content__section--not-found {
+  text-align: center;
+}
+
+.page-content__section--not-found h1 {
+  font-size: 76px;
+  color: #7575e2;
+}

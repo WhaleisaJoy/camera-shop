@@ -4,7 +4,8 @@ import type { AppDispatch, State } from '../types/state';
 import type { Camera } from '../types/camera';
 import type { PromoType } from '../types/promo';
 import type { PostReview, Review } from '../types/review';
-import { APIRoute } from '../const';
+import { APIRoute, AppRoute } from '../const';
+import { redirectToRoute } from './action';
 
 export const fetchCamerasAction = createAsyncThunk<Camera[], undefined, {
   dispatch: AppDispatch;
@@ -25,8 +26,13 @@ export const fetchCurrentCameraAction = createAsyncThunk<Camera, string, {
 }>(
   'data/fetchCurrentCamera',
   async (id, { dispatch, extra: api }) => {
-    const { data } = await api.get<Camera>(`${APIRoute.Cameras}/${id}`);
-    return data;
+    try {
+      const { data } = await api.get<Camera>(`${APIRoute.Cameras}/${id}`);
+      return data;
+    } catch (error) {
+      dispatch(redirectToRoute(AppRoute.NotFound));
+      throw error;
+    }
   },
 );
 
