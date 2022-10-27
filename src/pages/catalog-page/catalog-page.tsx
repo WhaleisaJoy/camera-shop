@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import Banner from '../../components/banner/banner';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import Filter from '../../components/filter/filter';
@@ -9,10 +10,14 @@ import Sort from '../../components/sort/sort';
 import { useAppDispatch } from '../../hooks';
 import { usePagination } from '../../hooks/usePagination';
 import { fetchCamerasAction, fetchPromoAction } from '../../store/api-actions';
-import { getCameras } from '../../store/data-reducer/selectors';
+import { getCameras, getLoadedDataStatus } from '../../store/data-reducer/selectors';
+import LoadingPage from '../loading-page/loading-page';
+import NotFoundPage from '../not-found-page/not-found-page';
 
 function Catalog(): JSX.Element {
   const dispatch = useAppDispatch();
+
+  const { id } = useParams();
 
   useEffect(() => {
     dispatch(fetchCamerasAction());
@@ -20,7 +25,22 @@ function Catalog(): JSX.Element {
   }, [dispatch]);
 
   const cameras = useSelector(getCameras);
+  const isCamerasLoading = useSelector(getLoadedDataStatus);
   const totalPages = usePagination(cameras.length);
+
+  if (isCamerasLoading) {
+    return <LoadingPage />;
+  }
+
+  if (
+    id && (
+      +id > totalPages ||
+      +id <= 0 ||
+      !/^[0-9]*$/.test(id)
+    )
+  ) {
+    return <NotFoundPage />;
+  }
 
   return (
     <main>

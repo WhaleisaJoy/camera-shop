@@ -17,6 +17,7 @@ export enum AppRoute {
   Community = '#',
   FAQ = '#',
   AskQuestion = '#',
+  NotFound = '/not-found',
 }
 
 export enum SocialRoute {
