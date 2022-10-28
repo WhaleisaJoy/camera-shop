@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-// import { LoadingStatus, SERVER_URL } from '../../const';
 import { LoadingStatus } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
@@ -33,9 +32,8 @@ function FormAddReview({ id }: FormAddReviewProps): JSX.Element {
 
   return (
     <form
-      //action={SERVER_URL}
       method="post"
-      onSubmit={handleSubmit(onFormSubmit)}
+      onSubmit={handleSubmit(onFormSubmit) as VoidFunction}
     >
       <div className="form-review__rate">
         <CustomRate
