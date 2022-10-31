@@ -15,7 +15,7 @@ function Modal({ children, handleClose }: ModalProps): JSX.Element {
   if (!modalRoot) {
     modalRoot = document.createElement('div');
     modalRoot.setAttribute('id', 'modal-root');
-    document.appendChild(modalRoot);
+    document.body.appendChild(modalRoot);
   }
 
   useEffect(() => {

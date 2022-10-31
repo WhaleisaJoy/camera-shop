@@ -34,7 +34,6 @@ function ReviewsItem({ review }: ReviewsItemProps): JSX.Element {
         <Rating
           rating={rating}
           className={'review-card__rate'}
-          isRateCount={false}
         />
       }
 

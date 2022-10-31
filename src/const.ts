@@ -33,9 +33,13 @@ export enum APIRoute {
   Reviews = '/reviews',
 }
 
-export enum NameSpace {
-  Data = 'DATA',
-}
+// export enum NameSpace {
+//   Data = 'DATA',
+// }
+
+export const NameSpace = {
+  Data: 'DATA',
+} as const;
 
 export enum KeyCode {
   Escape = 'Escape',
