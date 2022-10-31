@@ -155,7 +155,7 @@ export const BreadcrumbsSettings = {
     Name: 'Каталог',
     Route: AppRoute.Catalog,
   }
-};
+} as const;
 
 export enum DefaultCamera {
   id = 0,

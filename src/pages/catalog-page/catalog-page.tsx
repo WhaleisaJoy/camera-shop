@@ -20,7 +20,7 @@ const BREADCRUMBS_SETTINGS = [
   BreadcrumbsSettings.Catalog,
 ];
 
-function Catalog(): JSX.Element {
+function CatalogPage(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const { id } = useParams();
@@ -76,5 +76,5 @@ function Catalog(): JSX.Element {
   );
 }
 
-export default Catalog;
+export default CatalogPage;
 

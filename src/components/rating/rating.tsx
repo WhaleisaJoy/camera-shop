@@ -4,10 +4,9 @@ type RatingProps = {
   rating: number;
   reviewCount?: number;
   className?: string;
-  isRateCount?: boolean;
 };
 
-function Rating({ rating, reviewCount, className = 'product-card__rate', isRateCount = true }: RatingProps): JSX.Element {
+function Rating({ rating, reviewCount, className = 'product-card__rate' }: RatingProps): JSX.Element {
   return (
     <div className={`rate ${className}`}>
 
@@ -33,7 +32,7 @@ function Rating({ rating, reviewCount, className = 'product-card__rate', isRateC
       </p>
 
       {
-        isRateCount && (
+        reviewCount && (
           <p className="rate__count">
             <span className="visually-hidden">
               Всего оценок:

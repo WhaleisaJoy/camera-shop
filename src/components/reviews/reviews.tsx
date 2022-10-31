@@ -13,7 +13,7 @@ type ReviewsProps = {
   id: string | undefined;
 }
 
-const REVIEWS_STEP = 3;
+export const REVIEWS_STEP = 3;
 
 function Reviews({ id }: ReviewsProps): JSX.Element {
   const dispatch = useAppDispatch();
