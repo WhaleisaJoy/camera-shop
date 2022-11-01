@@ -2,20 +2,20 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import { Route, Routes } from 'react-router-dom';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import PageHeader from './page-header';
 
 const history = createMemoryHistory();
 
 describe('Component: PageHeader', () => {
   it('should render correctly', () => {
-    const { container } = render(
+    render(
       <HistoryRouter history={history}>
         <PageHeader />
       </HistoryRouter>
     );
 
-    expect(container.querySelector('.header')).toBeInTheDocument();
+    expect(screen.getByRole('banner')).toHaveClass('header');
   });
 
   it('should redirect to Root when user clicked to logo link', async () => {

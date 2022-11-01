@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
-import HistoryRouter from '../../components/history-route/history-route';
-import { storeWithMiddlewares } from '../../utils/mockStore';
+import HistoryRouter from '../../components/history-router/history-router';
+import { storeWithMiddlewares } from '../../utils/mock-store';
 import CatalogPage from './catalog-page';
 
 const history = createMemoryHistory();

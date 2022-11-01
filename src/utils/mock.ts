@@ -1,4 +1,4 @@
-import { datatype, date, image, internet, lorem } from 'faker';
+import { datatype, date, image, lorem } from 'faker';
 import { RatingSettings } from '../database';
 import { Camera } from '../types/camera';
 import { PromoType } from '../types/promo';

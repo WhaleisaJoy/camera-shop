@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { lorem } from 'faker/locale/ru';
 import { FormProvider, useForm } from 'react-hook-form';
 import CustomRate from './custom-rate';
@@ -27,8 +27,8 @@ describe('Component: CustomRate', () => {
       );
     };
 
-    const { container } = render(<Wrapper />);
+    render(<Wrapper />);
 
-    expect(container.querySelector('.rate')).toBeInTheDocument();
+    expect(screen.getByTestId('custom-rate')).toBeInTheDocument();
   });
 });

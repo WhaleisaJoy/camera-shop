@@ -51,7 +51,7 @@ function Reviews({ id }: ReviewsProps): JSX.Element {
 
         {
           reviews.length > 0 && (
-            <ul className="review-block__list">
+            <ul className="review-block__list" data-testid="review-block-list">
               {
                 reviews
                   .slice(0, shownReviews)

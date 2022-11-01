@@ -8,7 +8,7 @@ import thunk from 'redux-thunk';
 import App from './app';
 import { createAPI } from '../../services/api';
 import { Provider } from 'react-redux';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 
 const fakeCamera = makeFakeCamera();
 const fakeCameras = new Array(3).fill(null).map(() => makeFakeCamera());
@@ -66,7 +66,7 @@ describe('Application Routing', () => {
     expect(screen.getByText(/Каталог фото- и видеотехники/i)).toBeInTheDocument();
   });
 
-  it('should render "ProductPage" when user navigate to "/catalog/product-:id"', async () => {
+  it('should render "ProductPage" when user navigate to "/catalog/product-:id"', () => {
     history.push(`${AppRoute.Catalog}${AppRoute.Product}${fakeCamera.id}`);
 
     const customStore = mockStoreWithMiddlewares({

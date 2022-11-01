@@ -5,21 +5,21 @@ import type { PromoType } from './promo';
 import type { Review } from './review';
 
 export type DataReducer = {
-  cameras: Camera[],
-  currentCamera: Camera,
-  promo: PromoType,
-  similar: Camera[],
-  reviews: Review[],
-  isDataLoaded: boolean,
-  isCurrentCameraLoaded: boolean,
-  isPromoLoaded: boolean,
-  isSimilarLoaded: boolean,
-  isReviewsLoaded: boolean,
-  reviewSendingStatus: LoadingStatus,
+  cameras: Camera[];
+  currentCamera: Camera;
+  promo: PromoType;
+  similar: Camera[];
+  reviews: Review[];
+  isDataLoaded: boolean;
+  isCurrentCameraLoaded: boolean;
+  isPromoLoaded: boolean;
+  isSimilarLoaded: boolean;
+  isReviewsLoaded: boolean;
+  reviewSendingStatus: LoadingStatus;
 };
 
 export type PaginationReducer = {
-  currentPage: number,
+  currentPage: number;
 };
 
 export type State = ReturnType<typeof store.getState>;

@@ -1,4 +1,4 @@
 export type Breadcrumb = {
-  Name: string,
-  Route?: string,
+  Name: string;
+  Route?: string;
 }

@@ -4,7 +4,7 @@ import { createAPI } from '../../services/api';
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
-import HistoryRouter from '../../components/history-route/history-route';
+import HistoryRouter from '../../components/history-router/history-router';
 import { makeFakeCamera, makeFakeReview } from '../../utils/mock';
 import ProductPage from './product-page';
 
@@ -76,7 +76,7 @@ describe('Component: ProductPage', () => {
       },
     });
 
-    const { container } = render(
+    render(
       <Provider store={customStore}>
         <HistoryRouter history={history}>
           <ProductPage />
@@ -84,6 +84,6 @@ describe('Component: ProductPage', () => {
       </Provider>
     );
 
-    expect(container.querySelector('review-block__list')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('review-block-list')).not.toBeInTheDocument();
   });
 });

@@ -9,7 +9,7 @@ function Pagination({ totalPages }: PaginationProps): JSX.Element {
   const { id = 1 } = useParams();
 
   return (
-    <div className="pagination">
+    <div className="pagination" data-testid="pagination">
       <ul className="pagination__list">
 
         {

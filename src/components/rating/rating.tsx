@@ -8,7 +8,7 @@ type RatingProps = {
 
 function Rating({ rating, reviewCount, className = 'product-card__rate' }: RatingProps): JSX.Element {
   return (
-    <div className={`rate ${className}`}>
+    <div className={`rate ${className}`} data-testid="rate">
 
       {
         RatingSettings.map(({ Value, Name }) => {

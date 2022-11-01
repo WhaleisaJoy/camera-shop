@@ -2,8 +2,6 @@ export const PRODUCT_PAGINATION_STEP = 9;
 
 export const DEFAULT_PAGE = 1;
 
-export const SERVER_URL = 'https://camera-shop.accelerator.pages.academy/';
-
 export enum AppRoute {
   Root = '/',
   Catalog = '/catalog',

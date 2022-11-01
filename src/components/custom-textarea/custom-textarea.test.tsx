@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { lorem } from 'faker/locale/ru';
 import { FormProvider, useForm } from 'react-hook-form';
 import CustomTextarea from './custom-textarea';
@@ -31,8 +31,8 @@ describe('Component: CustomTextarea', () => {
       );
     };
 
-    const { container } = render(<Wrapper />);
+    render(<Wrapper />);
 
-    expect(container.querySelector('.custom-textarea')).toBeInTheDocument();
+    expect(screen.getByTestId('custom-textarea')).toBeInTheDocument();
   });
 });

@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { FormProvider, useForm } from 'react-hook-form';
 import RateBar from './rate-bar';
 
@@ -20,9 +20,9 @@ describe('Component: CustomTextarea', () => {
       );
     };
 
-    const { container } = render(<Wrapper />);
+    render(<Wrapper />);
 
-    expect(container.querySelector('.rate__bar')).toBeInTheDocument();
+    expect(screen.getByTestId('rate-bar')).toBeInTheDocument();
   });
 });
 

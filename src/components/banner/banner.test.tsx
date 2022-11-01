@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
-import { storeWithMiddlewares } from '../../utils/mockStore';
-import HistoryRouter from '../history-route/history-route';
+import { storeWithMiddlewares } from '../../utils/mock-store';
+import HistoryRouter from '../history-router/history-router';
 import Banner from './banner';
 
 const history = createMemoryHistory();

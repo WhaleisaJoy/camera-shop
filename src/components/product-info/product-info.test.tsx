@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { makeFakeCamera } from '../../utils/mock';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import ProductInfo from './product-info';
 
 const history = createMemoryHistory();

@@ -19,7 +19,7 @@ function ReviewsItem({ review }: ReviewsItemProps): JSX.Element {
   const date = dayjs(createAt);
 
   return (
-    <li className="review-card">
+    <li className="review-card" data-testid="review-card">
       <div className="review-card__head">
         <p className="title title--h4">{userName}</p>
         <time

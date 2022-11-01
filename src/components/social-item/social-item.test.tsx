@@ -3,8 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import { Route, Routes } from 'react-router-dom';
 import { SocialSettings } from '../../database';
-import { makeFakeReview } from '../../utils/mock';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import SocialItem from './social-item';
 
 const history = createMemoryHistory();
@@ -16,13 +15,13 @@ const fakeSocialSettings = {
 
 describe('Component: SocialItem', () => {
   it('should render correctly', () => {
-    const { container } = render(
+    render(
       <HistoryRouter history={history}>
         <SocialItem settings={fakeSocialSettings} />
       </HistoryRouter>
     );
 
-    expect(container.querySelector('.social__item')).toBeInTheDocument();
+    expect(screen.getByTestId('social-item')).toBeInTheDocument();
   });
 
   it('should redirect when user clicked to link', async () => {

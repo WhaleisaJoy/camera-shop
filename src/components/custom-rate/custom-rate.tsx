@@ -11,7 +11,7 @@ type RateBarProps = {
 
 function CustomRate({ register, isValid, errors, errorText }: RateBarProps): JSX.Element {
   return (
-    <fieldset className={`rate form-review__item ${isValid}`}>
+    <fieldset className={`rate form-review__item ${isValid}`} data-testid="custom-rate">
       <legend className="rate__caption">
         Рейтинг
         <IconSnowflake />

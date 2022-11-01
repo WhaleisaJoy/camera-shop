@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import { Route, Routes } from 'react-router-dom';
 import { makeFakeCamera } from '../../utils/mock';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import ProductsItem from './products-item';
 
 const history = createMemoryHistory();
@@ -18,7 +18,7 @@ describe('Component: ProductsItem', () => {
       </HistoryRouter>
     );
 
-    expect(screen.getByAltText(fakeCamera.name));
+    expect(screen.getByAltText(fakeCamera.name)).toBeInTheDocument();
   });
 
   it('should redirect to product page when user clicked to link', async () => {

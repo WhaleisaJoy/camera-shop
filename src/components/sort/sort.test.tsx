@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import Sort from './sort';
 
 const history = createMemoryHistory();
@@ -13,6 +13,6 @@ describe('Component: Sort', () => {
       </HistoryRouter>
     );
 
-    expect(screen.queryByText(/Сортировать:/i)).toBeInTheDocument();
+    expect(screen.getByText(/Сортировать:/i)).toBeInTheDocument();
   });
 });

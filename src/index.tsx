@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import browserHistory from './browser-history';
 import App from './components/app/app';
-import HistoryRouter from './components/history-route/history-route';
+import HistoryRouter from './components/history-router/history-router';
 import { store } from './store';
 
 const root = ReactDOM.createRoot(

@@ -14,7 +14,7 @@ function ProductsList({ cameras }: ProductsListProps): JSX.Element {
   const end = PRODUCT_PAGINATION_STEP * +id;
 
   return (
-    <div className="cards catalog__cards">
+    <div className="cards catalog__cards" data-testid="cards">
       {
         cameras
           .slice(start, end)

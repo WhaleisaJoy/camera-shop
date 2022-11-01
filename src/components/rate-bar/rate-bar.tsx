@@ -10,7 +10,7 @@ function RateBar({ register }: RateBarProps): JSX.Element {
   const [rate, setRate] = useState<number>(0);
 
   return (
-    <div className="rate__bar">
+    <div className="rate__bar" data-testid="rate-bar">
       <div className="rate__group">
         {
           ReviewRateSettings.map(({ Name, Value }) => (

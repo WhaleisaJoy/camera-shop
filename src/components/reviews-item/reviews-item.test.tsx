@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { makeFakeReview } from '../../utils/mock';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import ReviewsItem from './reviews-item';
 
 const history = createMemoryHistory();
@@ -10,13 +10,13 @@ const fakeReview = makeFakeReview();
 
 describe('Component: ReviewsItem', () => {
   it('should render correctly', () => {
-    const { container } = render(
+    render(
       <HistoryRouter history={history}>
         <ReviewsItem review={fakeReview} />
       </HistoryRouter>
     );
 
-    expect(container.querySelector('.review-card')).toBeInTheDocument();
+    expect(screen.getByTestId('review-card')).toBeInTheDocument();
     expect(screen.getByText(fakeReview.userName)).toBeInTheDocument();
   });
 });

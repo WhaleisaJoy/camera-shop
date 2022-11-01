@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { makeFakeCamera } from '../../utils/mock';
-import { storeWithMiddlewares } from '../../utils/mockStore';
-import HistoryRouter from '../history-route/history-route';
+import { storeWithMiddlewares } from '../../utils/mock-store';
+import HistoryRouter from '../history-router/history-router';
 import ModalAddToBasket from './modal-add-to-basket';
 
 const history = createMemoryHistory();

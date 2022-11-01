@@ -1,11 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { datatype } from 'faker';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
-import { storeWithMiddlewares } from '../../utils/mockStore';
-import HistoryRouter from '../history-route/history-route';
-import Reviews, { REVIEWS_STEP } from './reviews';
+import { storeWithMiddlewares } from '../../utils/mock-store';
+import HistoryRouter from '../history-router/history-router';
+import Reviews from './reviews';
 
 const history = createMemoryHistory();
 
@@ -22,17 +21,5 @@ describe('Component: Reviews', () => {
     );
 
     expect(screen.getByRole('heading', { name: 'Отзывы' })).toBeInTheDocument();
-  });
-
-  it('should render only 3 reviews when first render', () => {
-    const { container } = render(
-      <Provider store={storeWithMiddlewares}>
-        <HistoryRouter history={history}>
-          <Reviews id={fakeId} />
-        </HistoryRouter>
-      </Provider>
-    );
-
-    expect(container.querySelector('.review-block__list')?.childElementCount).toEqual(REVIEWS_STEP);
   });
 });

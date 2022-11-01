@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import { Route, Routes } from 'react-router-dom';
 import { makeFakeFooterNavSettings } from '../../utils/mock';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import FooterNavItem from './footer-nav-item';
 
 const history = createMemoryHistory();

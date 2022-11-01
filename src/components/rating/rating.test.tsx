@@ -2,8 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { datatype } from 'faker';
 import { lorem } from 'faker/locale/ru';
 import { createMemoryHistory } from 'history';
-import { makeFakeCamera } from '../../utils/mock';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import Rating from './rating';
 
 const history = createMemoryHistory();
@@ -16,31 +15,31 @@ const fakeRatingProps = {
 
 describe('Component: Rating', () => {
   it('should render correctly if only rating prop received', () => {
-    const { container } = render(
+    render(
       <HistoryRouter history={history}>
         <Rating rating={fakeRatingProps.rating} />
       </HistoryRouter>
     );
 
-    expect(container.querySelector('.rate')).toBeInTheDocument();
-    expect(container.querySelector('.product-card__rate')).toBeInTheDocument();
+    expect(screen.getByTestId('rate')).toBeInTheDocument();
+    expect(screen.getByTestId('rate')).toHaveClass('product-card__rate');
     expect(screen.getByText(`Рейтинг: ${fakeRatingProps.rating}`)).toBeInTheDocument();
-    expect(container.querySelector('.rate__count')).not.toBeInTheDocument();
+    expect(screen.queryByText(/Всего оценок:/i)).not.toBeInTheDocument();
   });
 
   it('should render correctly if rating and reviewCount props received', () => {
-    const { container } = render(
+    render(
       <HistoryRouter history={history}>
         <Rating rating={fakeRatingProps.rating} reviewCount={fakeRatingProps.reviewCount} />
       </HistoryRouter>
     );
 
-    expect(container.querySelector('.rate__count')).toBeInTheDocument();
+    expect(screen.getByText(/Всего оценок:/i)).toBeInTheDocument();
     expect(screen.getByText(fakeRatingProps.reviewCount)).toBeInTheDocument();
   });
 
   it('should render correctly if rating, reviewCount and className props received', () => {
-    const { container } = render(
+    render(
       <HistoryRouter history={history}>
         <Rating
           rating={fakeRatingProps.rating}
@@ -50,7 +49,7 @@ describe('Component: Rating', () => {
       </HistoryRouter>
     );
 
-    expect(container.querySelector('.product-card__rate')).not.toBeInTheDocument();
-    expect(container.querySelector(`.${fakeRatingProps.className}`)).toBeInTheDocument();
+    expect(screen.getByTestId('rate')).not.toHaveClass('product-card__rate');
+    expect(screen.getByTestId('rate')).toHaveClass(`${fakeRatingProps.className}`);
   });
 });

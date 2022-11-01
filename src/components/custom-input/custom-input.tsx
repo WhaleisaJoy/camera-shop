@@ -12,7 +12,7 @@ type CustomInputProps = {
 
 function CustomInput({ label, register, placeholder, isValid, errors, errorText }: CustomInputProps): JSX.Element {
   return (
-    <div className={`custom-input form-review__item ${isValid}`}>
+    <div className={`custom-input form-review__item ${isValid}`} data-testid="custom-input">
       <label>
         <span className="custom-input__label">
           {label}

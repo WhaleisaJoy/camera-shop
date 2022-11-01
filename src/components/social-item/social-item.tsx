@@ -14,7 +14,7 @@ function SocialItem({ settings }: SocialItemProps): JSX.Element {
   const { Label, Url, Icon, IconWidth, IconHeight } = settings;
 
   return (
-    <li className="social__item">
+    <li className="social__item" data-testid="social-item">
       <Link
         className="link"
         to={Url}

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import userEvent from '@testing-library/user-event';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import BackToTop from './back-to-top';
 
 const history = createMemoryHistory();

@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import { Route, Routes } from 'react-router-dom';
 import { MainNavSettings } from '../../database';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import MainNavItem from './main-nav-item';
 
 const history = createMemoryHistory();
@@ -39,10 +39,12 @@ describe('Component: MainNavItem', () => {
           />
           <Route
             path="*"
-            element={<MainNavItem
-              name={fakeMainNavItemSettings.name}
-              url={fakeMainNavItemSettings.url}
-            />}
+            element={
+              <MainNavItem
+                name={fakeMainNavItemSettings.name}
+                url={fakeMainNavItemSettings.url}
+              />
+            }
           />
         </Routes>
       </HistoryRouter>
