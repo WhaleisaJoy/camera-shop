@@ -4,16 +4,22 @@ import type { Camera } from './camera';
 import type { PromoType } from './promo';
 import type { Review } from './review';
 
-export type DataReducer = {
+export type CamerasData = {
   cameras: Camera[];
   currentCamera: Camera;
-  promo: PromoType;
   similar: Camera[];
-  reviews: Review[];
-  isDataLoaded: boolean;
+  isCamerasLoaded: boolean;
   isCurrentCameraLoaded: boolean;
-  isPromoLoaded: boolean;
   isSimilarLoaded: boolean;
+};
+
+export type PromoData = {
+  promo: PromoType;
+  isPromoLoaded: boolean;
+};
+
+export type ReviewsData = {
+  reviews: Review[];
   isReviewsLoaded: boolean;
   reviewSendingStatus: LoadingStatus;
 };

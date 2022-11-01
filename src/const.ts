@@ -31,13 +31,11 @@ export enum APIRoute {
   Reviews = '/reviews',
 }
 
-// export enum NameSpace {
-//   Data = 'DATA',
-// }
-
-export const NameSpace = {
-  Data: 'DATA',
-} as const;
+export enum NameSpace {
+  Cameras = 'CAMERAS',
+  Promo = 'PROMO',
+  Reviews = 'REVIEWS',
+}
 
 export enum KeyCode {
   Escape = 'Escape',

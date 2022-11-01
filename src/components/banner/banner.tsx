@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getPromo } from '../../store/data-reducer/selectors';
+import { getPromo } from '../../store/promo-data/selectors';
 
 function Banner(): JSX.Element {
   const promo = useSelector(getPromo);

@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import HistoryRouter from '../../components/history-router/history-router';
 import { makeFakeCamera, makeFakeReview } from '../../utils/mock';
 import ProductPage from './product-page';
+import { NameSpace } from '../../const';
 
 const history = createMemoryHistory();
 const api = createAPI();
@@ -20,12 +21,14 @@ const fakeReviews = [makeFakeReview(), makeFakeReview()];
 describe('Component: ProductPage', () => {
   it('should render correctly', () => {
     const customStore = mockStoreWithMiddlewares({
-      DATA: {
+      [NameSpace.Cameras]: {
         currentCamera: fakeCamera,
         similar: fakeCameras,
-        reviews: fakeReviews,
         isCurrentCameraLoaded: false,
         isSimilarLoaded: false,
+      },
+      [NameSpace.Reviews]: {
+        reviews: fakeReviews,
         isReviewsLoaded: false,
       },
     });
@@ -43,12 +46,14 @@ describe('Component: ProductPage', () => {
 
   it('should not render similar block if no similar cameras fetched', () => {
     const customStore = mockStoreWithMiddlewares({
-      DATA: {
+      [NameSpace.Cameras]: {
         currentCamera: fakeCamera,
         similar: [],
-        reviews: fakeReviews,
         isCurrentCameraLoaded: false,
         isSimilarLoaded: false,
+      },
+      [NameSpace.Reviews]: {
+        reviews: fakeReviews,
         isReviewsLoaded: false,
       },
     });
@@ -66,12 +71,14 @@ describe('Component: ProductPage', () => {
 
   it('should not render reviews list if no reviews fetched', () => {
     const customStore = mockStoreWithMiddlewares({
-      DATA: {
+      [NameSpace.Cameras]: {
         currentCamera: fakeCamera,
         similar: [],
-        reviews: [],
         isCurrentCameraLoaded: false,
         isSimilarLoaded: false,
+      },
+      [NameSpace.Reviews]: {
+        reviews: [],
         isReviewsLoaded: false,
       },
     });

@@ -9,7 +9,7 @@ import Reviews from '../../components/reviews/reviews';
 import { BreadcrumbsSettings } from '../../database';
 import { useAppDispatch } from '../../hooks';
 import { fetchCurrentCameraAction, fetchSimilarCamerasAction } from '../../store/api-actions';
-import { getCurrentCamera, getLoadedCurrentCameraStatus, getLoadedSimilarStatus, getSimilar } from '../../store/data-reducer/selectors';
+import { getCurrentCamera, getLoadedCurrentCameraStatus, getLoadedSimilarStatus, getSimilar } from '../../store/cameras-data/selectors';
 import LoadingPage from '../loading-page/loading-page';
 
 const BREADCRUMBS_SETTINGS = [

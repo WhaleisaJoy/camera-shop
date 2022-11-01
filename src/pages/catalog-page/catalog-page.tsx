@@ -11,7 +11,7 @@ import { BreadcrumbsSettings } from '../../database';
 import { useAppDispatch } from '../../hooks';
 import { usePagination } from '../../hooks/usePagination';
 import { fetchCamerasAction, fetchPromoAction } from '../../store/api-actions';
-import { getCameras, getLoadedDataStatus } from '../../store/data-reducer/selectors';
+import { getCameras, getLoadedCamerasStatus } from '../../store/cameras-data/selectors';
 import LoadingPage from '../loading-page/loading-page';
 import NotFoundPage from '../not-found-page/not-found-page';
 
@@ -31,7 +31,7 @@ function CatalogPage(): JSX.Element {
   }, [dispatch]);
 
   const cameras = useSelector(getCameras);
-  const isCamerasLoading = useSelector(getLoadedDataStatus);
+  const isCamerasLoading = useSelector(getLoadedCamerasStatus);
   const totalPages = usePagination(cameras.length);
 
   if (isCamerasLoading) {

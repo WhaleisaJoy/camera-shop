@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { createMemoryHistory } from 'history';
-import { AppRoute, DEFAULT_PAGE, LoadingStatus } from '../../const';
+import { AppRoute, DEFAULT_PAGE, LoadingStatus, NameSpace } from '../../const';
 import { DefaultCamera, DefaultPromo } from '../../database';
 import { makeFakeCamera, makeFakeReview } from '../../utils/mock';
 import thunk from 'redux-thunk';
@@ -15,16 +15,20 @@ const fakeCameras = new Array(3).fill(null).map(() => makeFakeCamera());
 const fakeReviews = new Array(3).fill(null).map(() => makeFakeReview());
 
 const initialStoreState = {
-  DATA: {
+  [NameSpace.Cameras]: {
     cameras: fakeCameras,
     currentCamera: DefaultCamera,
-    promo: DefaultPromo,
     similar: fakeCameras,
-    reviews: fakeReviews,
-    isDataLoaded: false,
+    isCamerasLoaded: false,
     isCurrentCameraLoaded: false,
-    isPromoLoaded: false,
     isSimilarLoaded: false,
+  },
+  [NameSpace.Promo]: {
+    promo: DefaultPromo,
+    isPromoLoaded: false,
+  },
+  [NameSpace.Reviews]: {
+    reviews: fakeReviews,
     isReviewsLoaded: false,
     reviewSendingStatus: LoadingStatus.Idle,
   },
@@ -70,12 +74,15 @@ describe('Application Routing', () => {
     history.push(`${AppRoute.Catalog}${AppRoute.Product}${fakeCamera.id}`);
 
     const customStore = mockStoreWithMiddlewares({
-      DATA: {
+      [NameSpace.Cameras]: {
         currentCamera: fakeCamera,
         similar: fakeCameras,
-        reviews: fakeReviews,
+        isCamerasLoaded: false,
         isCurrentCameraLoaded: false,
         isSimilarLoaded: false,
+      },
+      [NameSpace.Reviews]: {
+        reviews: fakeReviews,
         isReviewsLoaded: false,
       },
     });

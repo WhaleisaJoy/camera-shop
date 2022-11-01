@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { LoadingStatus } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
-import { getReviewSendingStatus } from '../../store/data-reducer/selectors';
+import { getReviewSendingStatus } from '../../store/reviews-data/selectors';
 import type { PostReview } from '../../types/review';
 import CustomInput from '../custom-input/custom-input';
 import CustomRate from '../custom-rate/custom-rate';
