@@ -11,7 +11,7 @@ function RateBar({ register }: RateBarProps): JSX.Element {
 
   return (
     <div className="rate__bar" data-testid="rate-bar">
-      <div className="rate__group">
+      <div className="rate__group" tabIndex={0}>
         {
           ReviewRateSettings.map(({ Name, Value }) => (
             <React.Fragment key={Name}>
@@ -22,12 +22,12 @@ function RateBar({ register }: RateBarProps): JSX.Element {
                 type="radio"
                 defaultValue={Value}
                 onClick={() => setRate(Value)}
+                tabIndex={-1}
               />
               <label
                 className="rate__label"
                 htmlFor={`star-${Value}`}
                 title={Name}
-                tabIndex={0}
               >
               </label>
             </React.Fragment>

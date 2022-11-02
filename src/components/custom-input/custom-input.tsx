@@ -5,12 +5,13 @@ type CustomInputProps = {
   label: string;
   register: UseFormRegisterReturn;
   placeholder: string;
+  autoFocus?: boolean;
   isValid: string;
   errors: FieldError | undefined;
   errorText: string;
 };
 
-function CustomInput({ label, register, placeholder, isValid, errors, errorText }: CustomInputProps): JSX.Element {
+function CustomInput({ label, register, placeholder, autoFocus = false, isValid, errors, errorText }: CustomInputProps): JSX.Element {
   return (
     <div className={`custom-input form-review__item ${isValid}`} data-testid="custom-input">
       <label>
@@ -21,6 +22,7 @@ function CustomInput({ label, register, placeholder, isValid, errors, errorText 
         <input
           type="text"
           {...register}
+          autoFocus={autoFocus}
           placeholder={placeholder}
         />
       </label>
