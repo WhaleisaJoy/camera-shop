@@ -2286,6 +2286,10 @@ button,
   transition: background-image 0.3s ease;
 }
 
+.rate__group--focus {
+  outline: 1px solid #ed6041;
+}
+
 .rate__group label {
   margin-right: 15px;
 }
@@ -2348,9 +2352,9 @@ button,
   background-size: 51px 48px;
 }
 
-.rate__group > input:focus + label {
+/* .rate__group > input:focus + label {
   outline: 1px solid #ed6041;
-}
+} */
 
 .product-card {
   display: -webkit-box;

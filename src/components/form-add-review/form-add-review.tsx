@@ -47,7 +47,6 @@ function FormAddReview({ id }: FormAddReviewProps): JSX.Element {
           label={'Ваше имя'}
           register={register('userName', { required: true })}
           placeholder={'Введите ваше имя'}
-          autoFocus
           isValid={checkIfValid('userName')}
           errors={errors.userName}
           errorText={'Нужно указать имя'}
