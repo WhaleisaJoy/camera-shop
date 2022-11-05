@@ -12,7 +12,6 @@ describe('Component: CustomInput', () => {
         label: lorem.words(),
         register: methods.register('test'),
         placeholder: lorem.sentence(),
-        autoFocus: false,
         isValid: '',
         errors: methods.formState.errors.test,
         errorText: lorem.sentence(),
@@ -24,7 +23,6 @@ describe('Component: CustomInput', () => {
             label={fakeCustomInputProps.label}
             register={fakeCustomInputProps.register}
             placeholder={fakeCustomInputProps.placeholder}
-            autoFocus={fakeCustomInputProps.autoFocus}
             isValid={fakeCustomInputProps.isValid}
             errors={fakeCustomInputProps.errors}
             errorText={fakeCustomInputProps.errorText}
