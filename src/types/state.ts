@@ -24,6 +24,11 @@ export type ReviewsData = {
   reviewSendingStatus: LoadingStatus;
 };
 
+export type SearchData = {
+  camerasBySearch: Camera[];
+  isCamerasBySearchLoaded: boolean;
+};
+
 export type PaginationReducer = {
   currentPage: number;
 };

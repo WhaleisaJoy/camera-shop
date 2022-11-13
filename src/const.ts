@@ -35,6 +35,7 @@ export enum NameSpace {
   Cameras = 'CAMERAS',
   Promo = 'PROMO',
   Reviews = 'REVIEWS',
+  Search = 'SEARCH',
 }
 
 export enum KeyCode {
