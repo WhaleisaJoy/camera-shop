@@ -14,3 +14,8 @@ export type Camera = {
   previewImgWebp2x: string;
   reviewCount: number;
 };
+
+export type CamerasQueryParams = {
+  sort?: string | null;
+  order?: string | null;
+};

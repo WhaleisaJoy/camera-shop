@@ -49,3 +49,18 @@ export enum LoadingStatus {
   Rejected = 'REJECTED',
 }
 
+export enum QueryParams {
+  Sort = '_sort',
+  Order = '_order',
+}
+
+export const SortSettings = {
+  Type: {
+    Price: 'price',
+    Rating: 'rating',
+  },
+  Order: {
+    Asc: 'asc',
+    Desc: 'desc',
+  },
+} as const;
