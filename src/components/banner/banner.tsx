@@ -1,10 +1,12 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import { getPromo } from '../../store/promo-data/selectors';
 
 function Banner(): JSX.Element {
   const promo = useSelector(getPromo);
   const {
+    id,
     name,
     previewImg,
     previewImg2x,
@@ -37,7 +39,7 @@ function Banner(): JSX.Element {
         <span className="banner__text">
           Профессиональная камера от&nbsp;известного производителя
         </span>
-        <Link className="btn" to="#">
+        <Link className="btn" to={`${AppRoute.Catalog}${AppRoute.Product}${id}`}>
           Подробнее
         </Link>
       </p>

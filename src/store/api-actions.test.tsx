@@ -3,7 +3,10 @@ import thunk, { ThunkDispatch } from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { createAPI } from '../services/api';
-import { fetchCamerasAction, fetchCurrentCameraAction, fetchPromoAction, fetchReviewsAction, fetchSimilarCamerasAction, postReviewAction } from './api-actions';
+import {
+  // fetchCamerasAction,
+  fetchCurrentCameraAction, fetchPromoAction, fetchReviewsAction, fetchSimilarCamerasAction, postReviewAction
+} from './api-actions';
 import { APIRoute } from '../const';
 import { State } from '../types/state';
 import { makeFakeCamera, makeFakePostReview, makeFakePromo, makeFakeReview } from '../utils/mock';
@@ -26,20 +29,20 @@ describe('Async actions', () => {
     ThunkDispatch<State, typeof api, Action>
   >(middlewares);
 
-  it('should dispatch fetchCamerasAction when GET /cameras', async () => {
-    mockAPI
-      .onGet(APIRoute.Cameras)
-      .reply(200, fakeCameras);
+  // it('should dispatch fetchCamerasAction when GET /cameras', async () => {
+  //   mockAPI
+  //     .onGet(APIRoute.Cameras)
+  //     .reply(200, fakeCameras);
 
-    const store = mockStore();
-    await store.dispatch(fetchCamerasAction());
-    const actions = store.getActions().map(({ type }) => type);
+  //   const store = mockStore();
+  //   await store.dispatch(fetchCamerasAction());
+  //   const actions = store.getActions().map(({ type }) => type);
 
-    expect(actions).toEqual([
-      fetchCamerasAction.pending.type,
-      fetchCamerasAction.fulfilled.type
-    ]);
-  });
+  //   expect(actions).toEqual([
+  //     fetchCamerasAction.pending.type,
+  //     fetchCamerasAction.fulfilled.type
+  //   ]);
+  // });
 
   it('should dispatch fetchCurrentCameraAction when GET /cameras/:id', async () => {
     mockAPI

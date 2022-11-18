@@ -1,20 +1,25 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import type { AppDispatch, State } from '../types/state';
-import type { Camera } from '../types/camera';
+import type { Camera, CamerasQueryParams } from '../types/camera';
 import type { PromoType } from '../types/promo';
 import type { PostReview, Review } from '../types/review';
-import { APIRoute, AppRoute } from '../const';
+import { APIRoute, AppRoute, QueryParams } from '../const';
 import { redirectToRoute } from './action';
 
-export const fetchCamerasAction = createAsyncThunk<Camera[], undefined, {
+export const fetchCamerasAction = createAsyncThunk<Camera[], CamerasQueryParams, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchCameras',
-  async (_arg, { dispatch, extra: api }) => {
-    const { data } = await api.get<Camera[]>(APIRoute.Cameras);
+  async ({ sort, order }, { dispatch, extra: api }) => {
+    const { data } = await api.get<Camera[]>(APIRoute.Cameras, {
+      params: {
+        [QueryParams.Sort]: sort,
+        [QueryParams.Order]: order,
+      }
+    });
     return data;
   },
 );
