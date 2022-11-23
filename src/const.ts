@@ -40,6 +40,7 @@ export enum NameSpace {
 
 export enum KeyCode {
   Escape = 'Escape',
+  Enter = 'Enter',
 }
 
 export enum LoadingStatus {
@@ -50,8 +51,14 @@ export enum LoadingStatus {
 }
 
 export enum QueryParams {
+  NameLike = 'name_like',
   Sort = '_sort',
   Order = '_order',
+  PriceFrom = 'price_gte',
+  PriceTo = 'price_lte',
+  Category = 'category',
+  Type = 'type',
+  Level = 'level',
 }
 
 export const SortSettings = {
@@ -64,3 +71,31 @@ export const SortSettings = {
     Desc: 'desc',
   },
 } as const;
+
+export const FilterKeys: string[] = [
+  QueryParams.PriceFrom,
+  QueryParams.PriceTo,
+  QueryParams.Category,
+  QueryParams.Type,
+  QueryParams.Level
+];
+
+export const FilterSettings = {
+  Category: {
+    Photocamera: 'Фотоаппарат',
+    Videocamera: 'Видеокамера',
+  },
+  Type: {
+    Digital: 'Цифровая',
+    Film: 'Плёночная',
+    Snapshot: 'Моментальная',
+    Collection: 'Коллекционная',
+  },
+  Level: {
+    Zero: 'Нулевой',
+    NonProfessional: 'Любительский',
+    Professional: 'Профессиональный',
+  },
+} as const;
+
+

@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
-import { DefaultCamera } from '../../database';
+import { DefaultCamera, DefaultPriceRange } from '../../database';
 import { CamerasData } from '../../types/state';
-import { fetchCamerasAction, fetchCurrentCameraAction, fetchSimilarCamerasAction } from '../api-actions';
+import { fetchCamerasAction, fetchCamerasPriceRangeAction, fetchCurrentCameraAction, fetchSimilarCamerasAction } from '../api-actions';
 
 const initialState: CamerasData = {
   cameras: [],
+  camerasPriceRange: DefaultPriceRange,
   currentCamera: DefaultCamera,
   similar: [],
   isCamerasLoaded: false,
@@ -25,6 +26,10 @@ export const camerasData = createSlice({
       .addCase(fetchCamerasAction.fulfilled, (state, action) => {
         state.cameras = action.payload;
         state.isCamerasLoaded = false;
+      })
+
+      .addCase(fetchCamerasPriceRangeAction.fulfilled, (state, action) => {
+        state.camerasPriceRange = action.payload;
       })
 
       .addCase(fetchCurrentCameraAction.pending, (state) => {

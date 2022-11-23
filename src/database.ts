@@ -157,6 +157,11 @@ export const BreadcrumbsSettings = {
   }
 } as const;
 
+export enum DefaultPriceRange {
+  minPrice = 0,
+  maxPrice = 0,
+}
+
 export enum DefaultCamera {
   id = 0,
   name = '',

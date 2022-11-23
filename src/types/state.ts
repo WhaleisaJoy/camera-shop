@@ -1,11 +1,12 @@
 import { LoadingStatus } from '../const';
 import { store } from '../store';
-import type { Camera } from './camera';
+import type { Camera, CamerasPriceRange } from './camera';
 import type { PromoType } from './promo';
 import type { Review } from './review';
 
 export type CamerasData = {
   cameras: Camera[];
+  camerasPriceRange: CamerasPriceRange;
   currentCamera: Camera;
   similar: Camera[];
   isCamerasLoaded: boolean;

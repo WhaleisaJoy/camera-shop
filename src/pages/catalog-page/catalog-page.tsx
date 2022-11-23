@@ -5,6 +5,7 @@ import Banner from '../../components/banner/banner';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import Filter from '../../components/filter/filter';
 import Loader from '../../components/loader/loader';
+import NoCameras from '../../components/no-cameras/no-cameras';
 import Pagination from '../../components/pagination/pagination';
 import ProductsList from '../../components/products-list/products-list';
 import Sort from '../../components/sort/sort';
@@ -12,7 +13,7 @@ import { QueryParams } from '../../const';
 import { BreadcrumbsSettings } from '../../database';
 import { useAppDispatch } from '../../hooks';
 import { usePagination } from '../../hooks/usePagination';
-import { fetchCamerasAction, fetchPromoAction } from '../../store/api-actions';
+import { fetchCamerasAction, fetchCamerasPriceRangeAction, fetchPromoAction } from '../../store/api-actions';
 import { getCameras, getLoadedCamerasStatus } from '../../store/cameras-data/selectors';
 import { getLoadedPromoStatus } from '../../store/promo-data/selectors';
 import LoadingPage from '../loading-page/loading-page';
@@ -42,6 +43,19 @@ function CatalogPage(): JSX.Element {
     dispatch(fetchCamerasAction({
       sort: searchParams.get(QueryParams.Sort),
       order: searchParams.get(QueryParams.Order),
+      priceFrom: searchParams.get(QueryParams.PriceFrom),
+      priceTo: searchParams.get(QueryParams.PriceTo),
+      [QueryParams.Category]: searchParams.get(QueryParams.Category),
+      [QueryParams.Type]: searchParams.get(QueryParams.Type),
+      [QueryParams.Level]: searchParams.getAll(QueryParams.Level),
+    }));
+  }, [dispatch, searchParams]);
+
+  useEffect(() => {
+    dispatch(fetchCamerasPriceRangeAction({
+      [QueryParams.Category]: searchParams.get(QueryParams.Category),
+      [QueryParams.Type]: searchParams.get(QueryParams.Type),
+      [QueryParams.Level]: searchParams.getAll(QueryParams.Level),
     }));
   }, [dispatch, searchParams]);
 
@@ -59,11 +73,10 @@ function CatalogPage(): JSX.Element {
   }
 
   if (
-    !isCamerasLoading &&
-    id && (
+    id && totalPages > 0 && (
       +id > totalPages ||
       +id <= 0 ||
-      !/^[0-9]*$/.test(id)
+       !/^[0-9]*$/.test(id)
     )
   ) {
     return <NotFoundPage />;
@@ -88,14 +101,18 @@ function CatalogPage(): JSX.Element {
                 <Sort />
 
                 {
-                  isCamerasLoading
-                    ? <Loader />
-                    : (
+                  isCamerasLoading && <Loader />
+                }
+
+                {
+                  !isCamerasLoading && cameras.length
+                    ? (
                       <>
                         <ProductsList cameras={cameras} />
                         <Pagination totalPages={totalPages} />
                       </>
                     )
+                    : <NoCameras />
                 }
               </div>
             </div>

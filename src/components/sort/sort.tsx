@@ -6,13 +6,14 @@ function Sort(): JSX.Element {
 
   const handleSortSettingsChange = (sortSettings: string, value: string) => {
     !searchParams.has(QueryParams.Sort) && searchParams.set(QueryParams.Sort, SortSettings.Type.Price);
+    !searchParams.has(QueryParams.Order) && searchParams.set(QueryParams.Order, SortSettings.Order.Asc);
     searchParams.set(sortSettings, value);
     setSearchParams(searchParams);
   };
 
-  const isPriceCheched = !searchParams.has(QueryParams.Sort) || searchParams.get(QueryParams.Sort) === SortSettings.Type.Price;
+  const isPriceCheched = searchParams.get(QueryParams.Sort) === SortSettings.Type.Price;
   const isRatingCheched = searchParams.get(QueryParams.Sort) === SortSettings.Type.Rating;
-  const isUpCheched = !searchParams.has(QueryParams.Order) || searchParams.get(QueryParams.Order) === SortSettings.Order.Asc;
+  const isUpCheched = searchParams.get(QueryParams.Order) === SortSettings.Order.Asc;
   const isDownCheched = searchParams.get(QueryParams.Order) === SortSettings.Order.Desc;
 
   return (
