@@ -18,4 +18,14 @@ export type Camera = {
 export type CamerasQueryParams = {
   sort?: string | null;
   order?: string | null;
+  priceFrom?: string | null;
+  priceTo?: string | null;
+  category?: string | null;
+  type?: string | null;
+  level?: string[] | null;
+};
+
+export type CamerasPriceRange = {
+  minPrice: number;
+  maxPrice: number;
 };

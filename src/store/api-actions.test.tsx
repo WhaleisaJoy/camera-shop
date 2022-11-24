@@ -4,10 +4,12 @@ import MockAdapter from 'axios-mock-adapter';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { createAPI } from '../services/api';
 import {
-  // fetchCamerasAction,
+  fetchCamerasAction,
+  fetchCamerasBySearchAction,
+  fetchCamerasPriceRangeAction,
   fetchCurrentCameraAction, fetchPromoAction, fetchReviewsAction, fetchSimilarCamerasAction, postReviewAction
 } from './api-actions';
-import { APIRoute } from '../const';
+import { APIRoute, QueryParams } from '../const';
 import { State } from '../types/state';
 import { makeFakeCamera, makeFakePostReview, makeFakePromo, makeFakeReview } from '../utils/mock';
 
@@ -29,20 +31,66 @@ describe('Async actions', () => {
     ThunkDispatch<State, typeof api, Action>
   >(middlewares);
 
-  // it('should dispatch fetchCamerasAction when GET /cameras', async () => {
-  //   mockAPI
-  //     .onGet(APIRoute.Cameras)
-  //     .reply(200, fakeCameras);
+  it('should dispatch fetchCamerasAction when GET /cameras', async () => {
+    mockAPI
+      .onGet(APIRoute.Cameras)
+      .reply(200, fakeCameras);
 
-  //   const store = mockStore();
-  //   await store.dispatch(fetchCamerasAction());
-  //   const actions = store.getActions().map(({ type }) => type);
+    const fakeParams = {
+      sort: null,
+      order: null,
+      priceFrom: null,
+      priceTo: null,
+      [QueryParams.Category]: null,
+      [QueryParams.Type]: null,
+      [QueryParams.Level]: null,
+    };
 
-  //   expect(actions).toEqual([
-  //     fetchCamerasAction.pending.type,
-  //     fetchCamerasAction.fulfilled.type
-  //   ]);
-  // });
+    const store = mockStore();
+    await store.dispatch(fetchCamerasAction(fakeParams));
+    const actions = store.getActions().map(({ type }) => type);
+
+    expect(actions).toEqual([
+      fetchCamerasAction.pending.type,
+      fetchCamerasAction.fulfilled.type
+    ]);
+  });
+
+  it('should dispatch fetchCamerasPriceRangeAction when GET /cameras with params', async () => {
+    mockAPI
+      .onGet(APIRoute.Cameras)
+      .reply(200, fakeCameras);
+
+    const fakeParams = {
+      [QueryParams.Category]: null,
+      [QueryParams.Type]: null,
+      [QueryParams.Level]: null,
+    };
+
+    const store = mockStore();
+    await store.dispatch(fetchCamerasPriceRangeAction(fakeParams));
+    const actions = store.getActions().map(({ type }) => type);
+
+    expect(actions).toEqual([
+      fetchCamerasPriceRangeAction.pending.type,
+      fetchCamerasPriceRangeAction.fulfilled.type
+    ]);
+  });
+
+  it('should dispatch fetchCamerasBySearchAction when GET /cameras?name_like', async () => {
+    mockAPI
+      .onGet(APIRoute.Cameras)
+      .reply(200, [fakeCamera]);
+
+    const store = mockStore();
+    await store.dispatch(fetchCamerasBySearchAction(fakeCamera.name));
+    const actions = store.getActions().map(({ type }) => type);
+
+    expect(actions).toEqual([
+      fetchCamerasBySearchAction.pending.type,
+      fetchCamerasBySearchAction.fulfilled.type
+    ]);
+  });
 
   it('should dispatch fetchCurrentCameraAction when GET /cameras/:id', async () => {
     mockAPI

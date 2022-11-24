@@ -1,12 +1,14 @@
 import { camerasData } from './cameras-data';
-import { makeFakeCamera } from '../../utils/mock';
-import { DefaultCamera } from '../../database';
-import { fetchCamerasAction, fetchCurrentCameraAction, fetchSimilarCamerasAction } from '../api-actions';
+import { makeFakeCamera, makeFakePriceRange } from '../../utils/mock';
+import { DefaultCamera, DefaultPriceRange } from '../../database';
+import { fetchCamerasAction, fetchCamerasPriceRangeAction, fetchCurrentCameraAction, fetchSimilarCamerasAction } from '../api-actions';
 
 const fakeCamera = makeFakeCamera();
 const fakeCameras = new Array(3).fill(null).map(() => makeFakeCamera());
+const fakePriceRange = makeFakePriceRange();
 const initialStoreState = {
   cameras: [],
+  camerasPriceRange: DefaultPriceRange,
   currentCamera: DefaultCamera,
   similar: [],
   isCamerasLoaded: false,
@@ -31,6 +33,13 @@ describe('Reducer: camerasData', () => {
     it('should update cameras by fetchCamerasAction', () => {
       expect(camerasData.reducer(state, { type: fetchCamerasAction.fulfilled.type, payload: fakeCameras }))
         .toEqual({ ...initialStoreState, cameras: fakeCameras });
+    });
+  });
+
+  describe('Action: fetchCamerasPriceRangeAction', () => {
+    it('should update cameras by fetchCamerasAction', () => {
+      expect(camerasData.reducer(state, { type: fetchCamerasPriceRangeAction.fulfilled.type, payload: fakePriceRange }))
+        .toEqual({ ...initialStoreState, camerasPriceRange: fakePriceRange });
     });
   });
 

@@ -1,45 +1,19 @@
 import { render, screen } from '@testing-library/react';
-import { configureMockStore } from '@jedmao/redux-mock-store';
 import { createMemoryHistory } from 'history';
-import { AppRoute, DEFAULT_PAGE, LoadingStatus, NameSpace } from '../../const';
-import { DefaultCamera, DefaultPromo } from '../../database';
+import { AppRoute, DEFAULT_PAGE, NameSpace } from '../../const';
 import { makeFakeCamera, makeFakeReview } from '../../utils/mock';
-import thunk from 'redux-thunk';
 import App from './app';
-import { createAPI } from '../../services/api';
 import { Provider } from 'react-redux';
 import HistoryRouter from '../history-router/history-router';
+import { mockStoreWithMiddlewares, storeWithMiddlewares } from '../../utils/mock-store';
 
 const fakeCamera = makeFakeCamera();
 const fakeCameras = new Array(3).fill(null).map(() => makeFakeCamera());
+const fakeSearchCameras = [makeFakeCamera()];
 const fakeReviews = new Array(3).fill(null).map(() => makeFakeReview());
-
-const initialStoreState = {
-  [NameSpace.Cameras]: {
-    cameras: fakeCameras,
-    currentCamera: DefaultCamera,
-    similar: fakeCameras,
-    isCamerasLoaded: false,
-    isCurrentCameraLoaded: false,
-    isSimilarLoaded: false,
-  },
-  [NameSpace.Promo]: {
-    promo: DefaultPromo,
-    isPromoLoaded: false,
-  },
-  [NameSpace.Reviews]: {
-    reviews: fakeReviews,
-    isReviewsLoaded: false,
-    reviewSendingStatus: LoadingStatus.Idle,
-  },
-};
 
 const history = createMemoryHistory();
 
-const api = createAPI();
-const middlewares = [thunk.withExtraArgument(api)];
-const mockStoreWithMiddlewares = configureMockStore(middlewares);
-const storeWithMiddlewares = mockStoreWithMiddlewares(initialStoreState);
 const fakeAppWithMiddlewares = (
   <Provider store={storeWithMiddlewares}>
     <HistoryRouter history={history}>
@@ -84,6 +58,10 @@ describe('Application Routing', () => {
       [NameSpace.Reviews]: {
         reviews: fakeReviews,
         isReviewsLoaded: false,
+      },
+      [NameSpace.Search]: {
+        camerasBySearch: fakeSearchCameras,
+        isCamerasBySearchLoaded: false,
       },
     });
 
