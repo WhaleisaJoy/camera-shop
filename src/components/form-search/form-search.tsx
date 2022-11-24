@@ -46,6 +46,7 @@ function FormSearch(): JSX.Element {
               <use xlinkHref="#icon-lens"></use>
             </svg>
             <DebounceInput
+              data-testid="search-input"
               className="form-search__input"
               type="text"
               value={inputField}

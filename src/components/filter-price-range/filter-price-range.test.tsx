@@ -3,20 +3,20 @@ import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { storeWithMiddlewares } from '../../utils/mock-store';
 import HistoryRouter from '../history-router/history-router';
-import Filter from './filter';
+import FilterPriceRange from './filter-price-range';
 
 const history = createMemoryHistory();
 
-describe('Component: Filter', () => {
+describe('Component: FilterPriceRange', () => {
   it('should render correctly', () => {
     render(
       <Provider store={storeWithMiddlewares}>
         <HistoryRouter history={history}>
-          <Filter />
+          <FilterPriceRange />
         </HistoryRouter>
       </Provider>
     );
 
-    expect(screen.getByRole('heading', { name: 'Фильтр' })).toBeInTheDocument();
+    expect(screen.getByText(/Цена, ₽/i)).toBeInTheDocument();
   });
 });

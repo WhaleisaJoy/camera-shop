@@ -21,6 +21,11 @@ export const makeFakeCamera = (): Camera => ({
   reviewCount: datatype.number(),
 });
 
+export const makeFakePriceRange = () => ({
+  minPrice: datatype.number(),
+  maxPrice: datatype.number(),
+});
+
 export const makeFakePromo = (): PromoType => ({
   id: datatype.number(),
   name: lorem.word(),

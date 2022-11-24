@@ -1,13 +1,6 @@
-import {
-  // useEffect,
-  useRef
-} from 'react';
-// import { useSelector } from 'react-redux';
+import { useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { FilterKeys, FilterSettings, QueryParams } from '../../const';
-// import { useAppDispatch } from '../../hooks';
-// import { fetchCamerasPriceRangeAction } from '../../store/api-actions';
-// import { getCamerasPriceRange } from '../../store/cameras-data/selectors';
 import FilterPriceRange from '../filter-price-range/filter-price-range';
 
 function Filter(): JSX.Element {
@@ -31,39 +24,12 @@ function Filter(): JSX.Element {
     formRef.current && formRef.current.reset();
   };
 
-
-  // const dispatch = useAppDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchCamerasPriceRangeAction({
-  //     [QueryParams.Category]: searchParams.get(QueryParams.Category),
-  //     [QueryParams.Type]: searchParams.get(QueryParams.Type),
-  //     [QueryParams.Level]: searchParams.getAll(QueryParams.Level),
-  //   }));
-  // }, [dispatch, searchParams]);
-
-  // const priceRange = useSelector(getCamerasPriceRange);
-
   return (
     <div className="catalog-filter">
       <form action="#" ref={formRef}>
         <h2 className="visually-hidden">Фильтр</h2>
 
         <FilterPriceRange />
-        {/* <fieldset className="catalog-filter__block">
-          <legend className="title title--h5">Цена, ₽</legend>
-          <div className="catalog-filter__price-range">
-            <div className="custom-input">
-              <label>
-                <input type="number" name="price" placeholder={priceRange.minPrice.toString()} />
-              </label>
-            </div>
-            <div className="custom-input">
-              <label>
-                <input type="number" name="priceUp" placeholder={priceRange.maxPrice.toString()} />
-              </label>
-            </div>
-          </div>
-        </fieldset> */}
 
         <fieldset className="catalog-filter__block">
           <legend className="title title--h5">Категория</legend>

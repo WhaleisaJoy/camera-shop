@@ -25,6 +25,7 @@ function Sort(): JSX.Element {
           <div className="catalog-sort__type">
             <div className="catalog-sort__btn-text">
               <input
+                data-testid="sort-price"
                 type="radio"
                 id="sortPrice"
                 name="sort"
@@ -35,6 +36,7 @@ function Sort(): JSX.Element {
             </div>
             <div className="catalog-sort__btn-text">
               <input
+                data-testid="sort-popular"
                 type="radio"
                 id="sortPopular"
                 name="sort"
@@ -48,6 +50,7 @@ function Sort(): JSX.Element {
           <div className="catalog-sort__order">
             <div className="catalog-sort__btn catalog-sort__btn--up">
               <input
+                data-testid="order-asc"
                 type="radio"
                 id="up"
                 name="sort-icon"
@@ -63,6 +66,7 @@ function Sort(): JSX.Element {
             </div>
             <div className="catalog-sort__btn catalog-sort__btn--down">
               <input
+                data-testid="order-desc"
                 type="radio"
                 id="down"
                 name="sort-icon"

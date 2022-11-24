@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, useSearchParams } from 'react-router-dom';
 import Banner from '../../components/banner/banner';
@@ -12,6 +12,7 @@ import Sort from '../../components/sort/sort';
 import { QueryParams } from '../../const';
 import { BreadcrumbsSettings } from '../../database';
 import { useAppDispatch } from '../../hooks';
+import { useIsMounted } from '../../hooks/useIsMounted';
 import { usePagination } from '../../hooks/usePagination';
 import { fetchCamerasAction, fetchCamerasPriceRangeAction, fetchPromoAction } from '../../store/api-actions';
 import { getCameras, getLoadedCamerasStatus } from '../../store/cameras-data/selectors';
@@ -29,15 +30,7 @@ function CatalogPage(): JSX.Element {
 
   const { id } = useParams();
   const [searchParams] = useSearchParams();
-  const isMounted = useRef(false);
-
-  useEffect(() => {
-    isMounted.current = true;
-
-    return () => {
-      isMounted.current = false;
-    };
-  }, []);
+  const isMounted = useIsMounted();
 
   useEffect(() => {
     dispatch(fetchCamerasAction({
@@ -68,7 +61,7 @@ function CatalogPage(): JSX.Element {
   const isPromoLoading = useSelector(getLoadedPromoStatus);
   const totalPages = usePagination(cameras.length);
 
-  if (!isMounted.current || isPromoLoading) {
+  if (!isMounted || isPromoLoading) {
     return <LoadingPage />;
   }
 
@@ -83,7 +76,7 @@ function CatalogPage(): JSX.Element {
   }
 
   return (
-    <main>
+    <main data-testid="catalog-page">
       <Banner />
 
       <div className="page-content">
