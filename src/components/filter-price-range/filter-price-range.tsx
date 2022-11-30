@@ -43,7 +43,7 @@ function FilterPriceRange(): JSX.Element {
         return;
       }
 
-      if (Number(value) > Number(priceTo)) {
+      if (Number(value) > Number(priceTo) && priceTo !== '') {
         setPriceFrom(priceTo);
         searchParams.set(QueryParams.PriceFrom, priceTo);
         setSearchParams(searchParams);
@@ -77,7 +77,7 @@ function FilterPriceRange(): JSX.Element {
         return;
       }
 
-      if (Number(value) < Number(priceFrom)) {
+      if (Number(value) < Number(priceFrom) && priceFrom !== '') {
         setPriceTo(priceFrom);
         searchParams.set(QueryParams.PriceTo, priceFrom);
         setSearchParams(searchParams);
