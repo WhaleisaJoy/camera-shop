@@ -3,7 +3,7 @@ import ClickAwayListener from 'react-click-away-listener';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, KeyCode } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { fetchCamerasBySearchAction } from '../../store/api-actions';
 import { getCamerasBySearch } from '../../store/search-data/selectors';
@@ -26,16 +26,20 @@ function FormSearch(): JSX.Element {
 
   const handleListItemClick = (id: number) => {
     navigate(`${AppRoute.Catalog}${AppRoute.Product}${id.toString()}`);
-    resetSeacrh();
+    resetSearch();
   };
 
-  const resetSeacrh = () => {
+  const handleListItemKeyDown = (evt: React.KeyboardEvent<HTMLLIElement>, id: number) => {
+    evt.key === KeyCode.Enter && handleListItemClick(id);
+  };
+
+  const resetSearch = () => {
     setInputField('');
     setSearchListOpen(false);
   };
 
   return (
-    <ClickAwayListener onClickAway={resetSeacrh}>
+    <ClickAwayListener onClickAway={resetSearch}>
       <div
         className={`form-search ${isSearchListOpen ? 'list-opened' : ''}`}
         data-testid="form-search"
@@ -56,7 +60,7 @@ function FormSearch(): JSX.Element {
               onChange={(evt) => handleInputChange(evt.target.value)}
             />
           </label>
-          <ul className="form-search__select-list">
+          <ul className="form-search__select-list scroller">
             {
               camerasBySearch.length > 0 && camerasBySearch.map((camera) => (
                 <li
@@ -64,6 +68,7 @@ function FormSearch(): JSX.Element {
                   className="form-search__select-item"
                   tabIndex={0}
                   onClick={() => handleListItemClick(camera.id)}
+                  onKeyDown={(evt) => handleListItemKeyDown(evt, camera.id)}
                 >
                   {camera.name}
                 </li>
@@ -75,7 +80,7 @@ function FormSearch(): JSX.Element {
         <button
           className="form-search__reset"
           type="reset"
-          onClick={resetSeacrh}
+          onClick={resetSearch}
         >
           <svg width="10" height="10" aria-hidden="true">
             <use xlinkHref="#icon-close"></use>

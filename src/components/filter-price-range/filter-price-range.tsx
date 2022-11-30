@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { KeyCode, QueryParams } from '../../const';
-import { getCamerasPriceRange } from '../../store/cameras-data/selectors';
+import { getCameras, getCamerasPriceRange } from '../../store/cameras-data/selectors';
 
 function FilterPriceRange(): JSX.Element {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const priceRange = useSelector(getCamerasPriceRange);
+
+  const cameras = useSelector(getCameras);
 
   const [priceFrom, setPriceFrom] = useState<string>('');
   const [priceTo, setPriceTo] = useState<string>('');
@@ -34,11 +36,30 @@ function FilterPriceRange(): JSX.Element {
 
   const handlePriceFromBlur = (value: string) => {
     if (value !== '') {
-      searchParams.set(QueryParams.PriceFrom, priceFrom);
-
       if (Number(value) < priceRange.minPrice) {
         setPriceFrom(priceRange.minPrice.toString());
         searchParams.set(QueryParams.PriceFrom, priceRange.minPrice.toString());
+        setSearchParams(searchParams);
+        return;
+      }
+
+      if (Number(value) > Number(priceTo)) {
+        setPriceFrom(priceTo);
+        searchParams.set(QueryParams.PriceFrom, priceTo);
+        setSearchParams(searchParams);
+        return;
+      }
+
+      if (cameras.some((camera) => camera.price === Number(value))) {
+        searchParams.set(QueryParams.PriceFrom, value);
+      } else {
+        const camerasWithHigherPrice = [...cameras]
+          .filter((camera) => camera.price > Number(value))
+          .sort((a, b) => a.price - b.price);
+        const closestMinPrice = camerasWithHigherPrice[0].price;
+
+        setPriceFrom(closestMinPrice.toString());
+        searchParams.set(QueryParams.PriceFrom, closestMinPrice.toString());
       }
     } else {
       searchParams.get(QueryParams.PriceFrom) && searchParams.delete(QueryParams.PriceFrom);
@@ -49,11 +70,30 @@ function FilterPriceRange(): JSX.Element {
 
   const handlePriceToBlur = (value: string) => {
     if (value !== '') {
-      searchParams.set(QueryParams.PriceTo, priceTo);
-
       if (Number(value) > priceRange.maxPrice || Number(value) < priceRange.minPrice) {
         setPriceTo(priceRange.maxPrice.toString());
         searchParams.set(QueryParams.PriceTo, priceRange.maxPrice.toString());
+        setSearchParams(searchParams);
+        return;
+      }
+
+      if (Number(value) < Number(priceFrom)) {
+        setPriceTo(priceFrom);
+        searchParams.set(QueryParams.PriceTo, priceFrom);
+        setSearchParams(searchParams);
+        return;
+      }
+
+      if (cameras.some((camera) => camera.price === Number(value))) {
+        searchParams.set(QueryParams.PriceTo, value);
+      } else {
+        const camerasWithLowerPrice = [...cameras]
+          .filter((camera) => camera.price < Number(value))
+          .sort((a, b) => b.price - a.price);
+        const closestMinPrice = camerasWithLowerPrice[0].price;
+
+        setPriceTo(closestMinPrice.toString());
+        searchParams.set(QueryParams.PriceTo, closestMinPrice.toString());
       }
     } else {
       searchParams.get(QueryParams.PriceTo) && searchParams.delete(QueryParams.PriceTo);
