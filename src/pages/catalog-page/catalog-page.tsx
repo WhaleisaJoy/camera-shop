@@ -69,7 +69,7 @@ function CatalogPage(): JSX.Element {
     id && totalPages > 0 && (
       +id > totalPages ||
       +id <= 0 ||
-       !/^[0-9]*$/.test(id)
+      !/^[0-9]*$/.test(id)
     )
   ) {
     return <NotFoundPage />;
@@ -93,9 +93,7 @@ function CatalogPage(): JSX.Element {
               <div className="catalog__content">
                 <Sort />
 
-                {
-                  isCamerasLoading && <Loader />
-                }
+                { isCamerasLoading && <Loader /> }
 
                 {
                   !isCamerasLoading && cameras.length
@@ -105,8 +103,10 @@ function CatalogPage(): JSX.Element {
                         <Pagination totalPages={totalPages} />
                       </>
                     )
-                    : <NoCameras />
+                    : ''
                 }
+
+                { !isCamerasLoading && !cameras.length && <NoCameras /> }
               </div>
             </div>
           </div>
