@@ -4,6 +4,10 @@ import type { Camera, CamerasPriceRange } from './camera';
 import type { PromoType } from './promo';
 import type { Review } from './review';
 
+export type BasketData = {
+  camerasInBasket: Camera[];
+};
+
 export type CamerasData = {
   cameras: Camera[];
   camerasPriceRange: CamerasPriceRange;

@@ -29,6 +29,7 @@ function Modal({ children, handleClose }: ModalProps): JSX.Element {
   }, [handleClose]);
 
   return ReactDOM.createPortal(
+    // <ReactFocusLock autoFocus={false}>
     <ReactFocusLock>
       <RemoveScroll>
         {children}

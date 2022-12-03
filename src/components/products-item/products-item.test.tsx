@@ -14,7 +14,10 @@ describe('Component: ProductsItem', () => {
   it('should render correctly', () => {
     render(
       <HistoryRouter history={history}>
-        <ProductsItem camera={fakeCamera} />
+        <ProductsItem
+          camera={fakeCamera}
+          isCameraInBasket
+        />
       </HistoryRouter>
     );
 
@@ -33,7 +36,7 @@ describe('Component: ProductsItem', () => {
           />
           <Route
             path="*"
-            element={<ProductsItem camera={fakeCamera} />}
+            element={<ProductsItem camera={fakeCamera} isCameraInBasket />}
           />
         </Routes>
       </HistoryRouter>
