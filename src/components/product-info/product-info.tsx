@@ -20,11 +20,11 @@ function ProductInfo({ camera }: ProductInfoProps): JSX.Element {
     previewImgWebp,
     previewImgWebp2x } = camera;
 
-  const [isAddToBasketModalOpen, setAddToBasketModalOpen] = useState(false);
-  const [isAddToBasketSuccessModalOpen, setAddToBasketSuccessModalOpen] = useState(false);
+  const [isAddProductModalOpen, setAddProductModalOpen] = useState(false);
+  const [isAddProductSuccessModalOpen, setAddProductSuccessModalOpen] = useState(false);
 
-  const handleAddToBasketModalToggle = () => setAddToBasketModalOpen((prevState) => !prevState);
-  const handleAddToBasketSuccessModalToggle = () => setAddToBasketSuccessModalOpen((prevState) => !prevState);
+  const handleAddProductModalToggle = () => setAddProductModalOpen((prevState) => !prevState);
+  const handleAddProductSuccessModalToggle = () => setAddProductSuccessModalOpen((prevState) => !prevState);
 
   return (
     <>
@@ -61,7 +61,7 @@ function ProductInfo({ camera }: ProductInfoProps): JSX.Element {
             <button
               className="btn btn--purple"
               type="button"
-              onClick={handleAddToBasketModalToggle}
+              onClick={handleAddProductModalToggle}
             >
               <svg width="24" height="16" aria-hidden="true">
                 <use xlinkHref="#icon-add-basket"></use>
@@ -74,15 +74,15 @@ function ProductInfo({ camera }: ProductInfoProps): JSX.Element {
       </section>
 
       {
-        isAddToBasketModalOpen &&
+        isAddProductModalOpen &&
         <ModalAddToBasket
           camera={camera}
-          handleCloseClick={handleAddToBasketModalToggle}
-          setAddToBasketSuccessModalOpen={setAddToBasketSuccessModalOpen}
+          handleCloseClick={handleAddProductModalToggle}
+          setAddProductSuccessModalOpen={setAddProductSuccessModalOpen}
         />
       }
 
-      { isAddToBasketSuccessModalOpen && <ModalAddToBasketSuccess handleCloseClick={handleAddToBasketSuccessModalToggle} /> }
+      { isAddProductSuccessModalOpen && <ModalAddToBasketSuccess handleCloseClick={handleAddProductSuccessModalToggle} /> }
     </>
   );
 }

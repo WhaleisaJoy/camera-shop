@@ -7,10 +7,10 @@ import Modal from '../modal/modal';
 type ModalAddToBasketProps = {
   camera: Camera;
   handleCloseClick: () => void;
-  setAddToBasketSuccessModalOpen: (value: React.SetStateAction<boolean>) => void;
+  setAddProductSuccessModalOpen: (value: React.SetStateAction<boolean>) => void;
 };
 
-function ModalAddToBasket({ camera, handleCloseClick, setAddToBasketSuccessModalOpen }: ModalAddToBasketProps): JSX.Element {
+function ModalAddToBasket({ camera, handleCloseClick, setAddProductSuccessModalOpen }: ModalAddToBasketProps): JSX.Element {
   const dispatch = useAppDispatch();
   const {
     name,
@@ -26,7 +26,7 @@ function ModalAddToBasket({ camera, handleCloseClick, setAddToBasketSuccessModal
   const handleAddToBasketClick = () => {
     dispatch(addToBasket(camera));
     handleCloseClick();
-    setAddToBasketSuccessModalOpen(true);
+    setAddProductSuccessModalOpen(true);
   };
 
   return (

@@ -12,11 +12,16 @@ describe('Component: ModalAddReviewSuccess', () => {
   it('should render correctly', () => {
     const fakeCamera = makeFakeCamera();
     const handleCloseClick = jest.fn();
+    const setAddProductSuccessModalOpen = jest.fn();
 
     render(
       <Provider store={storeWithMiddlewares}>
         <HistoryRouter history={history}>
-          <ModalAddToBasket camera={fakeCamera} handleCloseClick={handleCloseClick} />
+          <ModalAddToBasket
+            camera={fakeCamera}
+            handleCloseClick={handleCloseClick}
+            setAddProductSuccessModalOpen={setAddProductSuccessModalOpen}
+          />
         </HistoryRouter>
       </Provider>
     );
