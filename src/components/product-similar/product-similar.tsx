@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { getCamerasInBasket } from '../../store/basket-data/selectors';
 import type { Camera } from '../../types/camera';
 import ProductsItem from '../products-item/products-item';
 
@@ -9,6 +11,8 @@ type ProductSimilarProps = {
 export const PRODUCT_SIMILAR_STEP = 3;
 
 function ProductSimilar({ similarCameras }: ProductSimilarProps): JSX.Element {
+  const camerasInBasket = useSelector(getCamerasInBasket);
+
   const [shownSimilarCameras, setShownSimilarCameras] = useState<number>(PRODUCT_SIMILAR_STEP);
 
   return (
@@ -20,13 +24,18 @@ function ProductSimilar({ similarCameras }: ProductSimilarProps): JSX.Element {
             {
               similarCameras
                 .slice(shownSimilarCameras - PRODUCT_SIMILAR_STEP, shownSimilarCameras)
-                .map((camera) => (
-                  <ProductsItem
-                    key={camera.id}
-                    camera={camera}
-                    isActive
-                  />
-                ))
+                .map((camera) => {
+                  const isCameraInBasket = camerasInBasket.some((cameraInBasket) => camera.id === cameraInBasket.id);
+
+                  return (
+                    <ProductsItem
+                      key={camera.id}
+                      camera={camera}
+                      isCameraInBasket={isCameraInBasket}
+                      isActive
+                    />
+                  );
+                })
             }
           </div>
 
