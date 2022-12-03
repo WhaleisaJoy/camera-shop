@@ -32,6 +32,7 @@ export enum APIRoute {
 }
 
 export enum NameSpace {
+  Basket = 'BASKET',
   Cameras = 'CAMERAS',
   Promo = 'PROMO',
   Reviews = 'REVIEWS',

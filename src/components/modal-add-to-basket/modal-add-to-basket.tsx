@@ -1,3 +1,5 @@
+import { useAppDispatch } from '../../hooks';
+import { addToBasket } from '../../store/basket-data/basket-data';
 import type { Camera } from '../../types/camera';
 import ModalClose from '../modal-close/modal-close';
 import Modal from '../modal/modal';
@@ -5,9 +7,11 @@ import Modal from '../modal/modal';
 type ModalAddToBasketProps = {
   camera: Camera;
   handleCloseClick: () => void;
+  setAddToBasketSuccessModalOpen: (value: React.SetStateAction<boolean>) => void;
 };
 
-function ModalAddToBasket({ camera, handleCloseClick }: ModalAddToBasketProps): JSX.Element {
+function ModalAddToBasket({ camera, handleCloseClick, setAddToBasketSuccessModalOpen }: ModalAddToBasketProps): JSX.Element {
+  const dispatch = useAppDispatch();
   const {
     name,
     price,
@@ -18,6 +22,12 @@ function ModalAddToBasket({ camera, handleCloseClick }: ModalAddToBasketProps): 
     vendorCode,
     type,
     level } = camera;
+
+  const handleAddToBasketClick = () => {
+    dispatch(addToBasket(camera));
+    handleCloseClick();
+    setAddToBasketSuccessModalOpen(true);
+  };
 
   return (
     <Modal handleClose={handleCloseClick}>
@@ -63,7 +73,11 @@ function ModalAddToBasket({ camera, handleCloseClick }: ModalAddToBasketProps): 
               </div>
             </div>
             <div className="modal__buttons">
-              <button className="btn btn--purple modal__btn modal__btn--fit-width" type="button">
+              <button
+                className="btn btn--purple modal__btn modal__btn--fit-width"
+                type="button"
+                onClick={handleAddToBasketClick}
+              >
                 <svg width="24" height="16" aria-hidden="true">
                   <use xlinkHref="#icon-add-basket"></use>
                 </svg>
