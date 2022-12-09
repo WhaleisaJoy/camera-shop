@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import type { Camera } from '../../types/camera';
 import ModalAddToBasketSuccess from '../modal-add-to-basket-success/modal-add-to-basket-success';
 import ModalAddToBasket from '../modal-add-to-basket/modal-add-to-basket';
@@ -10,6 +12,8 @@ type ProductInfoProps = {
 };
 
 function ProductInfo({ camera }: ProductInfoProps): JSX.Element {
+  const navigate = useNavigate();
+
   const {
     name,
     price,
@@ -25,6 +29,7 @@ function ProductInfo({ camera }: ProductInfoProps): JSX.Element {
 
   const handleAddProductModalToggle = () => setAddProductModalOpen((prevState) => !prevState);
   const handleAddProductSuccessModalToggle = () => setAddProductSuccessModalOpen((prevState) => !prevState);
+  const handleContinueShoppingClick = () => navigate(`${AppRoute.Catalog}`);
 
   return (
     <>
@@ -82,7 +87,13 @@ function ProductInfo({ camera }: ProductInfoProps): JSX.Element {
         />
       }
 
-      { isAddProductSuccessModalOpen && <ModalAddToBasketSuccess handleCloseClick={handleAddProductSuccessModalToggle} /> }
+      {
+        isAddProductSuccessModalOpen &&
+        <ModalAddToBasketSuccess
+          handleCloseClick={handleAddProductSuccessModalToggle}
+          handleContinueShoppingClick={handleContinueShoppingClick}
+        />
+      }
     </>
   );
 }

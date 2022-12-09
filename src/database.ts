@@ -154,6 +154,9 @@ export const BreadcrumbsSettings = {
   Catalog: {
     Name: 'Каталог',
     Route: AppRoute.Catalog,
+  },
+  Basket: {
+    Name: 'Корзина',
   }
 } as const;
 

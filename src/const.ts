@@ -7,6 +7,7 @@ export enum AppRoute {
   Catalog = '/catalog',
   CatalogPage = '/catalog/page-',
   Product = '/product-',
+  Basket = '/basket',
   Warranty = '#',
   Delivery = '#',
   About = '#',

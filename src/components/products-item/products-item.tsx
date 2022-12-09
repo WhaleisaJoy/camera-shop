@@ -61,12 +61,13 @@ function ProductsItem({ camera, isActive, isCameraInBasket }: ProductsItemProps)
           </p>
         </div>
         <div className="product-card__buttons">
+
           {
             isCameraInBasket
               ?
               <Link
                 className="btn btn--purple-border product-card__btn product-card__btn--in-cart"
-                to="#"
+                to={AppRoute.Basket}
               >
                 <svg width="16" height="16" aria-hidden="true">
                   <use xlinkHref="#icon-basket"></use>
@@ -82,12 +83,14 @@ function ProductsItem({ camera, isActive, isCameraInBasket }: ProductsItemProps)
                 Купить
               </button>
           }
+
           <Link
             className="btn btn--transparent"
             to={`${AppRoute.Catalog}${AppRoute.Product}${id}`}
           >
             Подробнее
           </Link>
+
         </div>
       </div>
 

@@ -1,20 +1,20 @@
 import { useAppDispatch } from '../../hooks';
-import { addToBasket } from '../../store/basket-data/basket-data';
+import { deleteFromBasket } from '../../store/basket-data/basket-data';
+// import { addToBasket } from '../../store/basket-data/basket-data';
 import type { Camera } from '../../types/camera';
 import ModalClose from '../modal-close/modal-close';
 import Modal from '../modal/modal';
 
-type ModalAddToBasketProps = {
+type ModalDeleteFromBasketProps = {
   camera: Camera;
   handleCloseClick: () => void;
-  setAddProductSuccessModalOpen: (value: React.SetStateAction<boolean>) => void;
 };
 
-function ModalAddToBasket({ camera, handleCloseClick, setAddProductSuccessModalOpen }: ModalAddToBasketProps): JSX.Element {
+function ModalDeleteFromBasket({ camera, handleCloseClick }: ModalDeleteFromBasketProps): JSX.Element {
   const dispatch = useAppDispatch();
   const {
+    id,
     name,
-    price,
     previewImg,
     previewImg2x,
     previewImgWebp,
@@ -24,23 +24,19 @@ function ModalAddToBasket({ camera, handleCloseClick, setAddProductSuccessModalO
     category,
     level } = camera;
 
-  const handleAddToBasketClick = () => {
-    dispatch(addToBasket(camera));
+  const handleDeleteFromBasketClick = () => {
+    dispatch(deleteFromBasket(id));
     handleCloseClick();
-    setAddProductSuccessModalOpen(true);
   };
 
   return (
     <Modal handleClose={handleCloseClick}>
       <div className="modal is-active">
         <div className="modal__wrapper">
-          <div
-            className="modal__overlay"
-            onClick={handleCloseClick}
-          >
-          </div>
+          <div className="modal__overlay" onClick={handleCloseClick}></div>
           <div className="modal__content">
-            <p className="title title--h4">Добавить товар в корзину</p>
+            <p className="title title--h4">Удалить этот товар?</p>
+
             <div className="basket-item basket-item--short">
               <div className="basket-item__img">
                 <picture>
@@ -57,6 +53,7 @@ function ModalAddToBasket({ camera, handleCloseClick, setAddProductSuccessModalO
                   />
                 </picture>
               </div>
+
               <div className="basket-item__description">
                 <p className="basket-item__title">{name}</p>
                 <ul className="basket-item__list">
@@ -67,22 +64,24 @@ function ModalAddToBasket({ camera, handleCloseClick, setAddProductSuccessModalO
                   <li className="basket-item__list-item">{`${type} ${category.toLowerCase()}`}</li>
                   <li className="basket-item__list-item">{`${level} уровень`}</li>
                 </ul>
-                <p className="basket-item__price">
-                  <span className="visually-hidden">Цена:</span>
-                  {`${price} ₽`}
-                </p>
               </div>
             </div>
+
             <div className="modal__buttons">
               <button
-                className="btn btn--purple modal__btn modal__btn--fit-width"
+                className="btn btn--purple modal__btn modal__btn--half-width"
                 type="button"
-                onClick={handleAddToBasketClick}
+                onClick={handleDeleteFromBasketClick}
               >
-                <svg width="24" height="16" aria-hidden="true">
-                  <use xlinkHref="#icon-add-basket"></use>
-                </svg>
-                Добавить в корзину
+                Удалить
+              </button>
+
+              <button
+                className="btn btn--transparent modal__btn modal__btn--half-width"
+                type="button"
+                onClick={handleCloseClick}
+              >
+                Продолжить покупки
               </button>
             </div>
 
@@ -94,4 +93,4 @@ function ModalAddToBasket({ camera, handleCloseClick, setAddProductSuccessModalO
   );
 }
 
-export default ModalAddToBasket;
+export default ModalDeleteFromBasket;
