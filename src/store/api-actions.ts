@@ -7,12 +7,15 @@ import type { PostReview, Review } from '../types/review';
 import { APIRoute, AppRoute, QueryParams, SortSettings } from '../const';
 import { redirectToRoute } from './action';
 import { toast } from 'react-toastify';
+import { TPostCoupon } from '../types/coupon';
+// import { setCouponDiscount } from './basket-data/basket-data';
 
 enum ErrorMessage {
   FetchCameras = 'Не удалось загрузить данные из каталога',
   FetchPriceRange = 'Не удалось загрузить данные о ценах',
   FetchReviews = 'Не удалось загрузить список отзывов',
   PostReview = 'Не удалось отправить отзыв',
+  PostCoupon = 'Не удалось отправить промокод',
 }
 
 export const fetchCamerasAction = createAsyncThunk<Camera[], CamerasQueryParams, {
@@ -187,6 +190,23 @@ export const postReviewAction = createAsyncThunk<void, PostReview, {
       dispatch(fetchReviewsAction(reviewData.cameraId.toString()));
     } catch (error) {
       toast.error(ErrorMessage.PostReview);
+      throw error;
+    }
+  },
+);
+
+export const postCouponAction = createAsyncThunk<number, TPostCoupon, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/postCouponAction',
+  async (postData, { dispatch, extra: api }) => {
+    try {
+      const { data } = await api.post<number>(`${APIRoute.Coupon}`, postData);
+      return data;
+    } catch (error) {
+      toast.error(ErrorMessage.PostCoupon);
       throw error;
     }
   },

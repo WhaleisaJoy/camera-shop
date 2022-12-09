@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
+import { LoadingStatus, NameSpace } from '../../const';
 import { Camera } from '../../types/camera';
 import { BasketData } from '../../types/state';
+import { postCouponAction } from '../api-actions';
 
 type CameraUpdate = {
   cameraId: number;
@@ -10,6 +11,8 @@ type CameraUpdate = {
 
 const initialState: BasketData = {
   camerasInBasket: [],
+  couponDiscount: 0,
+  couponSendingStatus: LoadingStatus.Idle,
 };
 
 export const basketData = createSlice({
@@ -39,6 +42,20 @@ export const basketData = createSlice({
       // state.camerasInBasket = state.camerasInBasket.filter((camera) => camera.id !== action.payload);
     },
   },
+
+  extraReducers: (builder) => {
+    builder
+      .addCase(postCouponAction.pending, (state) => {
+        state.couponSendingStatus = LoadingStatus.Pending;
+      })
+      .addCase(postCouponAction.fulfilled, (state, action) => {
+        state.couponSendingStatus = LoadingStatus.Fulfilled;
+        state.couponDiscount = action.payload;
+      })
+      .addCase(postCouponAction.rejected, (state) => {
+        state.couponSendingStatus = LoadingStatus.Rejected;
+      });
+  }
 });
 
-export const { addToBasket, updateCamerasInBasketQuantity , deleteFromBasket } = basketData.actions;
+export const { addToBasket, updateCamerasInBasketQuantity, deleteFromBasket } = basketData.actions;

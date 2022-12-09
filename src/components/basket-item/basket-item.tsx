@@ -8,6 +8,7 @@ import { updateCamerasInBasketQuantity } from '../../store/basket-data/basket-da
 // import { addToBasket } from '../../store/basket-data/basket-data';
 // import { getCamerasInBasket } from '../../store/basket-data/selectors';
 import { Camera } from '../../types/camera';
+import { formatPrce } from '../../utils/utils';
 import ModalDeleteFromBasket from '../modal-delete-from-basket/modal-delete-from-basket';
 
 enum CamerasAmountRange {
@@ -108,7 +109,7 @@ function BasketItem({ camera }: BasketItemProps): JSX.Element {
 
         <p className="basket-item__price">
           <span className="visually-hidden">Цена:</span>
-          {`${price} ₽`}
+          {formatPrce(price)} ₽
         </p>
 
         <div className="quantity">
@@ -148,7 +149,7 @@ function BasketItem({ camera }: BasketItemProps): JSX.Element {
 
         <div className="basket-item__total-price">
           <span className="visually-hidden">Общая цена:</span>
-          {`${price * cameraCounter} ₽`}
+          {formatPrce(price * cameraCounter)} ₽
         </div>
 
         <button

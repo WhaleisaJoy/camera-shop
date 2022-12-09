@@ -1,6 +1,7 @@
 import { useAppDispatch } from '../../hooks';
 import { addToBasket } from '../../store/basket-data/basket-data';
 import type { Camera } from '../../types/camera';
+import { formatPrce } from '../../utils/utils';
 import ModalClose from '../modal-close/modal-close';
 import Modal from '../modal/modal';
 
@@ -69,7 +70,7 @@ function ModalAddToBasket({ camera, handleCloseClick, setAddProductSuccessModalO
                 </ul>
                 <p className="basket-item__price">
                   <span className="visually-hidden">Цена:</span>
-                  {`${price} ₽`}
+                  {`${formatPrce(price)} ₽`}
                 </p>
               </div>
             </div>

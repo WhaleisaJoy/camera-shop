@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import type { Camera } from '../../types/camera';
+import { formatPrce } from '../../utils/utils';
 import ModalAddToBasketSuccess from '../modal-add-to-basket-success/modal-add-to-basket-success';
 import ModalAddToBasket from '../modal-add-to-basket/modal-add-to-basket';
 import ProductTabs from '../product-tabs/product-tabs';
@@ -61,7 +62,7 @@ function ProductInfo({ camera }: ProductInfoProps): JSX.Element {
               <span className="visually-hidden">
               Цена:
               </span>
-              {`${price} ₽`}
+              {`${formatPrce(price)} ₽`}
             </p>
             <button
               className="btn btn--purple"
