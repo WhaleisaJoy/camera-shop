@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { LoadingStatus, NameSpace } from '../../const';
+import { DEFAULT_COUPON_DISCOUNT, LoadingStatus, NameSpace } from '../../const';
 import { Camera } from '../../types/camera';
 import { BasketData } from '../../types/state';
-import { postCouponAction } from '../api-actions';
+import { postCouponAction, postOrderAction } from '../api-actions';
 
 type CameraUpdate = {
   cameraId: number;
@@ -11,8 +11,9 @@ type CameraUpdate = {
 
 const initialState: BasketData = {
   camerasInBasket: [],
-  couponDiscount: 0,
+  couponDiscount: DEFAULT_COUPON_DISCOUNT,
   couponSendingStatus: LoadingStatus.Idle,
+  orderSendingStatus: LoadingStatus.Idle,
 };
 
 export const basketData = createSlice({
@@ -41,6 +42,16 @@ export const basketData = createSlice({
       state.camerasInBasket.splice(currentCameraInBasketIndex, 1);
       // state.camerasInBasket = state.camerasInBasket.filter((camera) => camera.id !== action.payload);
     },
+    resetBasket: (state) => {
+      state.camerasInBasket = [];
+      state.couponDiscount = DEFAULT_COUPON_DISCOUNT;
+      state.couponSendingStatus = LoadingStatus.Idle;
+      state.orderSendingStatus = LoadingStatus.Idle;
+    },
+
+    setCouponDiscount: (state, action: PayloadAction<number>) => {
+      state.couponDiscount = action.payload;
+    },
   },
 
   extraReducers: (builder) => {
@@ -54,8 +65,21 @@ export const basketData = createSlice({
       })
       .addCase(postCouponAction.rejected, (state) => {
         state.couponSendingStatus = LoadingStatus.Rejected;
+      })
+
+      .addCase(postOrderAction.pending, (state) => {
+        state.orderSendingStatus = LoadingStatus.Pending;
+      })
+      .addCase(postOrderAction.fulfilled, (state) => {
+        state.orderSendingStatus = LoadingStatus.Fulfilled;
+      })
+      .addCase(postOrderAction.rejected, (state) => {
+        state.orderSendingStatus = LoadingStatus.Rejected;
       });
   }
 });
 
-export const { addToBasket, updateCamerasInBasketQuantity, deleteFromBasket } = basketData.actions;
+export const {
+  addToBasket, updateCamerasInBasketQuantity, deleteFromBasket, resetBasket,
+  setCouponDiscount,
+} = basketData.actions;

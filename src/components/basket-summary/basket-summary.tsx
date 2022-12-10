@@ -1,28 +1,81 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { LoadingStatus } from '../../const';
+import { DEFAULT_COUPON_DISCOUNT, LoadingStatus } from '../../const';
 import { useAppDispatch } from '../../hooks';
-import { postCouponAction } from '../../store/api-actions';
-import { getCamerasInBasketTotalPrice, getCouponDiscount, getCouponSendingStatus } from '../../store/basket-data/selectors';
+import { postCouponAction, postOrderAction } from '../../store/api-actions';
+import { resetBasket, setCouponDiscount } from '../../store/basket-data/basket-data';
+import { getCamerasInBasket, getCamerasInBasketTotalPrice, getCouponDiscount, getCouponSendingStatus, getOrderSendingStatus } from '../../store/basket-data/selectors';
 import { convertToPercent, formatPrce } from '../../utils/utils';
+import ModalMakeOrderSuccess from '../modal-make-order-success/modal-make-order-success';
 
 function BasketSummary(): JSX.Element {
   const dispatch = useAppDispatch();
 
+  const camerasInBasket = useSelector(getCamerasInBasket);
   const totalPrice = useSelector(getCamerasInBasketTotalPrice);
   const couponSendingStatus = useSelector(getCouponSendingStatus);
+  const orderSendingStatus = useSelector(getOrderSendingStatus);
   const couponDiscount = useSelector(getCouponDiscount);
   const couponDiscountPercent = convertToPercent(couponDiscount);
 
   const [coupon, setCoupon] = useState<string>('');
+  const [isCouponValid, setCouponValidity] = useState<boolean>(false);
+  const [isModalOpen, setModalOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    switch (couponSendingStatus) {
+      case LoadingStatus.Fulfilled:
+        setCouponValidity(true);
+        break;
+      case LoadingStatus.Rejected:
+        setCouponValidity(false);
+        dispatch(setCouponDiscount(DEFAULT_COUPON_DISCOUNT));
+        break;
+      default:
+        break;
+    }
+
+    // couponSendingStatus === LoadingStatus.Fulfilled
+    //   ? setCouponValidity(true)
+    //   : setCouponValidity(false);
+  }, [couponSendingStatus, dispatch]);
+
+  useEffect(() => {
+    if (orderSendingStatus === LoadingStatus.Fulfilled) {
+      setModalOpen(true);
+      dispatch(resetBasket());
+      setCoupon('');
+    }
+  },[dispatch, orderSendingStatus]);
 
   const handleCouponInputChange = (evt: ChangeEvent<HTMLInputElement>) => setCoupon(evt.target.value.trim());
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-
     coupon && dispatch(postCouponAction({coupon}));
   };
+
+  const handleMakeOrder = () => {
+    // const camerasInBasketIds = useSelector(getCamerasInBasketIds);
+    const camerasIds: number[] = [];
+    camerasInBasket.forEach(({ id, quantity }) => {
+      for (let i = 0; i < Number(quantity); i++) {
+        camerasIds.push(id);
+      }
+    });
+    // const camerasInBasketIds2: number[] = camerasInBasket
+    //   .map<number[]>(({ id, quantity }) => Array.from({length: Number(quantity)}).fill(id))
+    //   .flat();
+
+    dispatch(postOrderAction({
+      camerasIds,
+      coupon: isCouponValid ? coupon : null,
+    }));
+  };
+
+  const handleModalToggle = () => setModalOpen((prevState) => !prevState);
+
+  const isCouponSendingStatusIsPending = couponSendingStatus === LoadingStatus.Pending;
 
   return (
     <div className="basket__summary">
@@ -47,7 +100,7 @@ function BasketSummary(): JSX.Element {
                   value={coupon}
                   placeholder="Введите промокод"
                   onChange={handleCouponInputChange}
-                  disabled={couponSendingStatus === LoadingStatus.Pending}
+                  disabled={isCouponSendingStatusIsPending}
                 />
               </label>
               <p className="custom-input__error">Промокод неверный</p>
@@ -56,7 +109,7 @@ function BasketSummary(): JSX.Element {
             <button
               className="btn"
               type="submit"
-              disabled={couponSendingStatus === LoadingStatus.Pending}
+              disabled={isCouponSendingStatusIsPending}
             >
               Применить
             </button>
@@ -89,8 +142,17 @@ function BasketSummary(): JSX.Element {
           </span>
         </p>
 
-        <button className="btn btn--purple" type="submit">Оформить заказ</button>
+        <button
+          className="btn btn--purple"
+          type="submit"
+          onClick={handleMakeOrder}
+          disabled={isCouponSendingStatusIsPending}
+        >
+          Оформить заказ
+        </button>
       </div>
+
+      { isModalOpen && <ModalMakeOrderSuccess handleCloseClick={handleModalToggle} /> }
     </div>
   );
 }

@@ -2,6 +2,8 @@ export const PRODUCT_PAGINATION_STEP = 9;
 
 export const DEFAULT_PAGE = 1;
 
+export const DEFAULT_COUPON_DISCOUNT = 0;
+
 export enum AppRoute {
   Root = '/',
   Catalog = '/catalog',
@@ -30,7 +32,8 @@ export enum APIRoute {
   Promo = '/promo',
   Similar = '/similar',
   Reviews = '/reviews',
-  Coupon = '/coupons',
+  Coupons = '/coupons',
+  Orders = '/orders',
 }
 
 export enum NameSpace {
