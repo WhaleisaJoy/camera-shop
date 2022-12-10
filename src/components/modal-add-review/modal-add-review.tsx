@@ -9,7 +9,7 @@ type ModalAddReviewProps = {
 
 function ModalAddReview({ id, handleCloseClick }: ModalAddReviewProps): JSX.Element {
   return (
-    <Modal handleClose={handleCloseClick}>
+    <Modal handleClose={handleCloseClick} isAutoFocus>
       <div className="modal is-active">
         <div className="modal__wrapper">
           <div className="modal__overlay" onClick={handleCloseClick}></div>

@@ -7,9 +7,10 @@ import { KeyCode } from '../../const';
 type ModalProps = {
   children: ReactNode;
   handleClose: () => void;
+  isAutoFocus?: boolean;
 };
 
-function Modal({ children, handleClose }: ModalProps): JSX.Element {
+function Modal({ children, handleClose, isAutoFocus = false }: ModalProps): JSX.Element {
   let modalRoot = document.getElementById('modal-root');
 
   if (!modalRoot) {
@@ -29,8 +30,7 @@ function Modal({ children, handleClose }: ModalProps): JSX.Element {
   }, [handleClose]);
 
   return ReactDOM.createPortal(
-    // <ReactFocusLock autoFocus={false}>
-    <ReactFocusLock>
+    <ReactFocusLock autoFocus={isAutoFocus}>
       <RemoveScroll>
         {children}
       </RemoveScroll>
