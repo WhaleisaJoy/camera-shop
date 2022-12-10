@@ -1,3 +1,4 @@
+import { SetStateAction } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { addToBasket } from '../../store/basket-data/basket-data';
 import type { Camera } from '../../types/camera';
@@ -8,7 +9,7 @@ import Modal from '../modal/modal';
 type ModalAddToBasketProps = {
   camera: Camera;
   handleCloseClick: () => void;
-  setAddProductSuccessModalOpen: (value: React.SetStateAction<boolean>) => void;
+  setAddProductSuccessModalOpen: (value: SetStateAction<boolean>) => void;
 };
 
 function ModalAddToBasket({ camera, handleCloseClick, setAddProductSuccessModalOpen }: ModalAddToBasketProps): JSX.Element {

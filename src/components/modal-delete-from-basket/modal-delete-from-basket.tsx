@@ -1,6 +1,5 @@
 import { useAppDispatch } from '../../hooks';
 import { deleteFromBasket } from '../../store/basket-data/basket-data';
-// import { addToBasket } from '../../store/basket-data/basket-data';
 import type { Camera } from '../../types/camera';
 import ModalClose from '../modal-close/modal-close';
 import Modal from '../modal/modal';

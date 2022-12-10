@@ -7,6 +7,7 @@ import { AppRoute, KeyCode } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { fetchCamerasBySearchAction } from '../../store/api-actions';
 import { getCamerasBySearch } from '../../store/search-data/selectors';
+import { KeyboardEvent } from 'react';
 
 function FormSearch(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -29,7 +30,7 @@ function FormSearch(): JSX.Element {
     resetSearch();
   };
 
-  const handleListItemKeyDown = (evt: React.KeyboardEvent<HTMLLIElement>, id: number) => {
+  const handleListItemKeyDown = (evt: KeyboardEvent<HTMLLIElement>, id: number) => {
     evt.key === KeyCode.Enter && handleListItemClick(id);
   };
 

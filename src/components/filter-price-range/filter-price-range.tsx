@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { SetStateAction, KeyboardEvent, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { KeyCode, QueryParams } from '../../const';
@@ -21,7 +21,7 @@ function FilterPriceRange(): JSX.Element {
     setPriceTo(priceToParam.toString());
   }, [searchParams]);
 
-  const handlePriceChange = (value: string, setPrice: (value: React.SetStateAction<string>) => void) => {
+  const handlePriceChange = (value: string, setPrice: (value: SetStateAction<string>) => void) => {
     if (Number(value) < 0) {
       setPrice('');
       return;
@@ -30,7 +30,7 @@ function FilterPriceRange(): JSX.Element {
     setPrice(value);
   };
 
-  const handlePriceKeyDown = (evt: React.KeyboardEvent<HTMLInputElement>, handlePriceBlur: (value: string) => void) => {
+  const handlePriceKeyDown = (evt: KeyboardEvent<HTMLInputElement>, handlePriceBlur: (value: string) => void) => {
     evt.key === KeyCode.Enter && handlePriceBlur(evt.currentTarget.value);
   };
 
