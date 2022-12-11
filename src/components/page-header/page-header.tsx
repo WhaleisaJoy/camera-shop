@@ -23,11 +23,14 @@ function PageHeader(): JSX.Element {
 
         <FormSearch />
 
-        <Link className="header__basket-link" to={AppRoute.Basket}>
+        <Link data-testid="header-basket-link" className="header__basket-link" to={AppRoute.Basket}>
           <svg width="16" height="16" aria-hidden="true">
             <use xlinkHref="#icon-basket"></use>
           </svg>
-          { camerasInBasketQuantity > 0 && <span className="header__basket-count">{camerasInBasketQuantity}</span> }
+          {camerasInBasketQuantity > 0 &&
+            <span data-testid="header-basket-count" className="header__basket-count">
+              {camerasInBasketQuantity}
+            </span>}
         </Link>
       </div>
     </header>

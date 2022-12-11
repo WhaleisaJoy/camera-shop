@@ -1,6 +1,6 @@
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import thunk from 'redux-thunk';
-import { LoadingStatus, NameSpace } from '../const';
+import { DEFAULT_COUPON_DISCOUNT, LoadingStatus, NameSpace } from '../const';
 import { DefaultCamera, DefaultPriceRange, DefaultPromo } from '../database';
 import { createAPI } from '../services/api';
 import { makeFakeCamera, makeFakeReview } from './mock';
@@ -10,6 +10,12 @@ const fakeSearchCameras = [makeFakeCamera()];
 const fakeReviews = new Array(3).fill(null).map(() => makeFakeReview());
 
 const initialStoreState = {
+  [NameSpace.Basket]: {
+    camerasInBasket: [],
+    couponDiscount: DEFAULT_COUPON_DISCOUNT,
+    couponSendingStatus: LoadingStatus.Idle,
+    orderSendingStatus: LoadingStatus.Idle,
+  },
   [NameSpace.Cameras]: {
     cameras: fakeCameras,
     camerasPriceRange: DefaultPriceRange,

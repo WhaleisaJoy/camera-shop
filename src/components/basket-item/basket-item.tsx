@@ -126,6 +126,7 @@ function BasketItem({ camera }: BasketItemProps): JSX.Element {
 
           <label className="visually-hidden" htmlFor="counter1"></label>
           <input
+            data-testid="camera-counter-input"
             type="number"
             id="counter1"
             value={cameraCounter}

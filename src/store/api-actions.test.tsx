@@ -7,16 +7,19 @@ import {
   fetchCamerasAction,
   fetchCamerasBySearchAction,
   fetchCamerasPriceRangeAction,
-  fetchCurrentCameraAction, fetchPromoAction, fetchReviewsAction, fetchSimilarCamerasAction, postReviewAction
+  fetchCurrentCameraAction, fetchPromoAction, fetchReviewsAction, fetchSimilarCamerasAction, postCouponAction, postOrderAction, postReviewAction
 } from './api-actions';
 import { APIRoute, QueryParams } from '../const';
 import { State } from '../types/state';
-import { makeFakeCamera, makeFakePostReview, makeFakePromo, makeFakeReview } from '../utils/mock';
+import { makeFakeCamera, makeFakePostCoupon, makeFakePostOrder, makeFakePostReview, makeFakePromo, makeFakeReview } from '../utils/mock';
+import { datatype } from 'faker';
 
 const fakeCamera = makeFakeCamera();
 const fakePromo = makeFakePromo();
 const fakeReview = makeFakeReview();
 const fakePostReview = makeFakePostReview();
+const fakePostCoupon = makeFakePostCoupon();
+const fakePostOrder = makeFakePostOrder();
 const fakeCameras = [makeFakeCamera(), fakeCamera];
 const fakeReviews = [makeFakeReview(), fakeReview];
 
@@ -165,6 +168,36 @@ describe('Async actions', () => {
       postReviewAction.pending.type,
       fetchReviewsAction.pending.type,
       postReviewAction.fulfilled.type
+    ]);
+  });
+
+  it('should dispatch postCouponAction when POST /coupons', async () => {
+    mockAPI
+      .onPost(`${APIRoute.Coupons}`, fakePostCoupon)
+      .reply(200, datatype.number());
+
+    const store = mockStore();
+    await store.dispatch(postCouponAction(fakePostCoupon));
+    const actions = store.getActions().map(({ type }) => type);
+
+    expect(actions).toEqual([
+      postCouponAction.pending.type,
+      postCouponAction.fulfilled.type
+    ]);
+  });
+
+  it('should dispatch postOrderAction when POST /orders', async () => {
+    mockAPI
+      .onPost(`${APIRoute.Orders}`, fakePostOrder)
+      .reply(200, []);
+
+    const store = mockStore();
+    await store.dispatch(postOrderAction(fakePostOrder));
+    const actions = store.getActions().map(({ type }) => type);
+
+    expect(actions).toEqual([
+      postOrderAction.pending.type,
+      postOrderAction.fulfilled.type
     ]);
   });
 });

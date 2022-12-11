@@ -5,13 +5,12 @@ import './basket-list.css';
 
 function BasketList(): JSX.Element {
   const camerasInBasket = useSelector(getCamerasInBasket);
-  // const camerasInBasketWithoutDuplicates = new Set(camerasInBasket);
 
   return (
     <>
       {
         camerasInBasket.length > 0 &&
-          <ul className="basket__list">
+          <ul className="basket__list" data-testid="basket-list">
             { camerasInBasket.map((camera) => <BasketItem key={camera.id} camera={camera} />) }
           </ul >
       }
