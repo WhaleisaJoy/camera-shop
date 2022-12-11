@@ -1,26 +1,29 @@
 import { render, screen } from '@testing-library/react';
+import { lorem } from 'faker';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
-import { makeFakeCamera } from '../../utils/mock';
 import { storeWithMiddlewares } from '../../utils/mock-store';
 import HistoryRouter from '../history-router/history-router';
-import ProductsList from './products-list';
+import BasketPromo from './basket-promo';
 
 const history = createMemoryHistory();
 
-const fakeCameras = new Array(15).fill(null).map(() => makeFakeCamera());
-
-describe('Component: ProductSimilar', () => {
+describe('Component: BasketPromo', () => {
   it('should render correctly', () => {
+    const fakeCoupon = lorem.word();
+    const fakeSetCoupon = jest.fn();
+
     render(
       <Provider store={storeWithMiddlewares}>
         <HistoryRouter history={history}>
-          <ProductsList cameras={fakeCameras} />
+          <BasketPromo
+            coupon={fakeCoupon}
+            setCoupon={fakeSetCoupon}
+          />
         </HistoryRouter>
       </Provider>
-
     );
 
-    expect(screen.getByTestId('cards')).toBeInTheDocument();
+    expect(screen.getByText(/Если у вас есть промокод на скидку, примените его в этом поле/i)).toBeInTheDocument();
   });
 });

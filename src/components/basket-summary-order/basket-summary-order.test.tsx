@@ -1,26 +1,25 @@
 import { render, screen } from '@testing-library/react';
+import { lorem } from 'faker';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
-import { makeFakeCamera } from '../../utils/mock';
 import { storeWithMiddlewares } from '../../utils/mock-store';
 import HistoryRouter from '../history-router/history-router';
-import ProductsList from './products-list';
+import BasketSummaryOrder from './basket-summary-order';
 
 const history = createMemoryHistory();
 
-const fakeCameras = new Array(15).fill(null).map(() => makeFakeCamera());
-
-describe('Component: ProductSimilar', () => {
+describe('Component: BasketSummaryOrder', () => {
   it('should render correctly', () => {
+    const fakeCoupon = lorem.word();
+
     render(
       <Provider store={storeWithMiddlewares}>
         <HistoryRouter history={history}>
-          <ProductsList cameras={fakeCameras} />
+          <BasketSummaryOrder coupon={fakeCoupon} />
         </HistoryRouter>
       </Provider>
-
     );
 
-    expect(screen.getByTestId('cards')).toBeInTheDocument();
+    expect(screen.getByText(/Всего:/i)).toBeInTheDocument();
   });
 });

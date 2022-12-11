@@ -14,10 +14,6 @@ export const getCamerasInBasketTotalPrice = createSelector(
   getCamerasInBasket,
   (camerasInBasket) => camerasInBasket.reduce((acc, current) => acc + current.price * Number(current.quantity), 0)
 );
-export const getCamerasInBasketIds = createSelector(
-  getCamerasInBasket,
-  (camerasInBasket) => camerasInBasket.map(({id}) => id)
-);
 
 export const getCouponSendingStatus = (state: State): LoadingStatus => state[NameSpace.Basket].couponSendingStatus;
 export const getOrderSendingStatus = (state: State): LoadingStatus => state[NameSpace.Basket].orderSendingStatus;

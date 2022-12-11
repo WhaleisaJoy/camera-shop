@@ -21,7 +21,6 @@ export const basketData = createSlice({
   initialState,
   reducers: {
     addToBasket: (state, action: PayloadAction<Camera>) => {
-      //state.camerasInBasket.push(action.payload);
       const camera = action.payload;
       const currentCameraInBasket = state.camerasInBasket.find((cameraInBasket) => cameraInBasket.id === camera.id);
 
@@ -40,7 +39,6 @@ export const basketData = createSlice({
       const currentCameraInBasketIndex = state.camerasInBasket.findIndex((cameraInBasket) => cameraInBasket.id === cameraToDeleteId);
 
       state.camerasInBasket.splice(currentCameraInBasketIndex, 1);
-      // state.camerasInBasket = state.camerasInBasket.filter((camera) => camera.id !== action.payload);
     },
     resetBasket: (state) => {
       state.camerasInBasket = [];

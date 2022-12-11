@@ -48,6 +48,9 @@ describe('Application Routing', () => {
     history.push(`${AppRoute.Catalog}${AppRoute.Product}${fakeCamera.id}`);
 
     const customStore = mockStoreWithMiddlewares({
+      [NameSpace.Basket]: {
+        camerasInBasket: [],
+      },
       [NameSpace.Cameras]: {
         currentCamera: fakeCamera,
         similar: fakeCameras,
@@ -74,6 +77,13 @@ describe('Application Routing', () => {
     );
 
     expect(screen.getByRole('heading', { name: fakeCamera.name })).toBeInTheDocument();
+  });
+
+  it('should render "BasketPage" when user navigate to "/basket"', () => {
+    history.push(AppRoute.Basket);
+    render(fakeAppWithMiddlewares);
+
+    expect(screen.getByRole('heading', { name: /Корзина/i })).toBeInTheDocument();
   });
 
   it('should render "NotFoundPage" when user navigate to non-existent route', () => {

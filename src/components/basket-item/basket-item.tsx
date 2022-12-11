@@ -1,12 +1,6 @@
-import {
-  useEffect,
-  useState
-} from 'react';
-// import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { updateCamerasInBasketQuantity } from '../../store/basket-data/basket-data';
-// import { addToBasket } from '../../store/basket-data/basket-data';
-// import { getCamerasInBasket } from '../../store/basket-data/selectors';
 import { Camera } from '../../types/camera';
 import { formatPrce } from '../../utils/utils';
 import ModalDeleteFromBasket from '../modal-delete-from-basket/modal-delete-from-basket';
@@ -35,16 +29,6 @@ function BasketItem({ camera }: BasketItemProps): JSX.Element {
     previewImgWebp,
     previewImgWebp2x,
     quantity} = camera;
-
-  // const camerasInBasket = useSelector(getCamerasInBasket);
-  // const currentCameraAmount = camerasInBasket
-  //   .map((cameraInBasket) => cameraInBasket.id)
-  //   .reduce((acc, currentValue) => {
-  //     currentValue === camera.id && acc++;
-  //     return acc;
-  //   }, 0);
-
-  // const [cameraCounter, setCameraCounter] = useState<number>(currentCameraAmount);
 
   const [cameraCounter, setCameraCounter] = useState<number>(Number(quantity));
   const [isModalOpen, setModalOpen] = useState(false);
