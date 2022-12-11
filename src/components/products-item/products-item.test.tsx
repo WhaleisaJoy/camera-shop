@@ -43,7 +43,7 @@ describe('Component: ProductsItem', () => {
     );
 
     expect(screen.queryByText(/This is Product Page/i)).not.toBeInTheDocument();
-    await userEvent.click(screen.getByRole('link'));
+    await userEvent.click(screen.getByRole('link', { name: 'Подробнее' }));
     expect(screen.getByText(/This is Product Page/i)).toBeInTheDocument();
   });
 });

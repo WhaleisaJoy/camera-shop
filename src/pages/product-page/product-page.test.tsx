@@ -31,6 +31,9 @@ describe('Component: ProductPage', () => {
         reviews: fakeReviews,
         isReviewsLoaded: false,
       },
+      [NameSpace.Basket]: {
+        camerasInBasket: [],
+      },
     });
 
     render(

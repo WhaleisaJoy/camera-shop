@@ -1,7 +1,7 @@
 import { makeFakeReview } from '../../utils/mock';
 import { LoadingStatus } from '../../const';
 import { fetchReviewsAction, postReviewAction } from '../api-actions';
-import { reviewsData } from './reviews-data';
+import { reviewsData, setReviewSendingStatus } from './reviews-data';
 
 const fakeReviews = new Array(3).fill(null).map(() => makeFakeReview());
 const initialStoreState = {
@@ -44,6 +44,13 @@ describe('Reducer: reviewsData', () => {
     it('should update reviewSendingStatus to rejected when postReviewAction rejected', () => {
       expect(reviewsData.reducer(state, { type: postReviewAction.rejected.type }))
         .toEqual({ ...initialStoreState, reviewSendingStatus: LoadingStatus.Rejected });
+    });
+  });
+
+  describe('Action: setReviewSendingStatus', () => {
+    it('should update reviewSendingStatus to fulfilled when setReviewSendingStatus fulfilled', () => {
+      expect(reviewsData.reducer(state, setReviewSendingStatus(LoadingStatus.Fulfilled)))
+        .toEqual({ ...initialStoreState, reviewSendingStatus: LoadingStatus.Fulfilled });
     });
   });
 });

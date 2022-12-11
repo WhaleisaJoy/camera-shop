@@ -1,5 +1,7 @@
+import { MouseEvent } from 'react';
+
 function BackToTop(): JSX.Element {
-  const handleBackToTopClick = (evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+  const handleBackToTopClick = (evt: MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -8,7 +10,7 @@ function BackToTop(): JSX.Element {
     <a
       className="up-btn"
       href="#header"
-      onClick={(evt) => handleBackToTopClick(evt)}
+      onClick={handleBackToTopClick}
     >
       <svg width="12" height="18" aria-hidden="true">
         <use xlinkHref="#icon-arrow2"></use>

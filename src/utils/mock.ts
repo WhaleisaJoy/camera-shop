@@ -1,6 +1,8 @@
 import { datatype, date, image, lorem } from 'faker';
 import { RatingSettings } from '../database';
 import { Camera } from '../types/camera';
+import { TPostCoupon } from '../types/coupon';
+import { TPostOrder } from '../types/order';
 import { PromoType } from '../types/promo';
 import { PostReview, Review } from '../types/review';
 
@@ -53,6 +55,15 @@ export const makeFakePostReview = (): PostReview => ({
   disadvantage: lorem.words(),
   review: lorem.sentences(),
   rating: datatype.number(),
+});
+
+export const makeFakePostCoupon = (): TPostCoupon => ({
+  coupon: lorem.word(),
+});
+
+export const makeFakePostOrder = (): TPostOrder => ({
+  camerasIds: [datatype.number()],
+  coupon: null,
 });
 
 export const makeFakeFooterNavSettings = () => ({

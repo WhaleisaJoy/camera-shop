@@ -1,26 +1,22 @@
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
-import { makeFakeCamera } from '../../utils/mock';
+import HistoryRouter from '../../components/history-router/history-router';
 import { storeWithMiddlewares } from '../../utils/mock-store';
-import HistoryRouter from '../history-router/history-router';
-import ProductsList from './products-list';
+import BasketPage from './basket-page';
 
 const history = createMemoryHistory();
 
-const fakeCameras = new Array(15).fill(null).map(() => makeFakeCamera());
-
-describe('Component: ProductSimilar', () => {
+describe('Component: BasketPage', () => {
   it('should render correctly', () => {
     render(
       <Provider store={storeWithMiddlewares}>
         <HistoryRouter history={history}>
-          <ProductsList cameras={fakeCameras} />
+          <BasketPage />
         </HistoryRouter>
       </Provider>
-
     );
 
-    expect(screen.getByTestId('cards')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Корзина/i })).toBeInTheDocument();
   });
 });

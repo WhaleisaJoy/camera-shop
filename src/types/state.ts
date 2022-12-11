@@ -6,6 +6,9 @@ import type { Review } from './review';
 
 export type BasketData = {
   camerasInBasket: Camera[];
+  couponDiscount: number;
+  couponSendingStatus: LoadingStatus;
+  orderSendingStatus: LoadingStatus;
 };
 
 export type CamerasData = {

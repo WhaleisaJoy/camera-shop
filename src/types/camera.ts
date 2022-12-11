@@ -13,6 +13,7 @@ export type Camera = {
   previewImgWebp: string;
   previewImgWebp2x: string;
   reviewCount: number;
+  quantity?: number;
 };
 
 export type CamerasQueryParams = {

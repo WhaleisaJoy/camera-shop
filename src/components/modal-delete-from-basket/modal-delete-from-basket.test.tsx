@@ -4,28 +4,27 @@ import { Provider } from 'react-redux';
 import { makeFakeCamera } from '../../utils/mock';
 import { storeWithMiddlewares } from '../../utils/mock-store';
 import HistoryRouter from '../history-router/history-router';
-import ModalAddToBasket from './modal-add-to-basket';
+import ModalDeleteFromBasket from './modal-delete-from-basket';
 
 const history = createMemoryHistory();
 
-describe('Component: ModalAddToBasket', () => {
+const fakeCamera = makeFakeCamera();
+
+describe('Component: ModalDeleteFromBasket', () => {
   it('should render correctly', () => {
-    const fakeCamera = makeFakeCamera();
     const handleCloseClick = jest.fn();
-    const setAddProductSuccessModalOpen = jest.fn();
 
     render(
       <Provider store={storeWithMiddlewares}>
         <HistoryRouter history={history}>
-          <ModalAddToBasket
+          <ModalDeleteFromBasket
             camera={fakeCamera}
             handleCloseClick={handleCloseClick}
-            setAddProductSuccessModalOpen={setAddProductSuccessModalOpen}
           />
         </HistoryRouter>
       </Provider>
     );
 
-    expect(screen.getByText(/Добавить товар в корзину/i)).toBeInTheDocument();
+    expect(screen.getByText(/Удалить этот товар?/i)).toBeInTheDocument();
   });
 });
